@@ -1,0 +1,28 @@
+#N canvas 652 108 450 422 12;
+#X declare -path pddp;
+#X obj 76 21 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0 1
+;
+#X obj 76 41 metro 250;
+#X obj 76 66 random 24;
+#X obj 76 91 + 48;
+#X obj 211 68 eg-hjh~ 10 80 0.4 30;
+#X obj 76 141 mtof;
+#X obj 76 211 osc~;
+#X obj 132 267 *~;
+#X obj 112 311 ezoutput~;
+#X obj 76 116 makenote 64 50;
+#X text 202 22 inlets: gate \, A \, D \, S \, R;
+#X text 219 258 gate: 1 open \, 0 closed;
+#X text 202 41 creation args: A D S R;
+#X obj 207 311 declare -path pddp;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 3 0 9 0;
+#X connect 4 0 7 1;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 7 0 8 0;
+#X connect 7 0 8 1;
+#X connect 9 0 5 0;
+#X connect 9 1 4 0;

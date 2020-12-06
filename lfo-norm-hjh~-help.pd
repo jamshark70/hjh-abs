@@ -1,0 +1,21 @@
+#N canvas 712 141 450 297 12;
+#X obj 77 31 hsl 128 15 0.1 20 1 1 empty empty LFO rate -2 -8 0 10
+-262144 -1 -1 7300 1;
+#X obj 135 72 hsl 128 15 0.05 0.95 0 1 empty empty LFO pulse width
+-2 -8 0 10 -262144 -1 -1 11000 1;
+#X msg 162 114 sin;
+#X msg 190 114 tri;
+#X msg 246 114 pulse;
+#X msg 216 114 saw;
+#X msg 290 114 rand;
+#X obj 74 193 lfo-norm-hjh~ tri;
+#X text 71 221 Output is -1 to +1;
+#X msg 327 114 line;
+#X connect 0 0 7 0;
+#X connect 1 0 7 1;
+#X connect 2 0 7 2;
+#X connect 3 0 7 2;
+#X connect 4 0 7 2;
+#X connect 5 0 7 2;
+#X connect 6 0 7 2;
+#X connect 9 0 7 2;

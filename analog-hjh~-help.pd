@@ -1,0 +1,32 @@
+#N canvas 689 198 575 463 12;
+#X declare -path pddp;
+#X obj 55 344 ezoutput~;
+#X obj 74 293 *~ 0.2;
+#X obj 74 247 analog-hjh~;
+#X obj 77 24 hsl 128 15 50 1200 1 1 empty empty freq -2 -8 0 10 -262144
+-1 -1 4100 1;
+#X obj 101 81 hsl 128 15 100 12000 1 1 empty empty ffreq -2 -8 0 10
+-262144 -1 -1 5900 1;
+#X floatatom 74 44 5 0 0 0 - - -;
+#X floatatom 98 101 5 0 0 0 - - -;
+#X obj 126 137 hsl 128 15 0.707 50 1 1 empty empty Q -2 -8 0 10 -262144
+-1 -1 2200 1;
+#X floatatom 123 157 5 0 0 0 - - -;
+#X obj 151 197 hsl 128 15 0 1 0 1 empty empty filter_type_xfade -2
+-8 0 10 -262144 -1 -1 0 1;
+#X floatatom 148 217 5 0 0 0 - - -;
+#X text 281 27 analog-style oscillator+filter \; inlets \; frequency
+\; filter frequency \; Q \; filter type \; 0 = lowpass \, 1 = bandpass
+\, 2 = highpass;
+#X obj 150 344 declare -path pddp;
+#X connect 1 0 0 0;
+#X connect 1 0 0 1;
+#X connect 2 0 1 0;
+#X connect 3 0 5 0;
+#X connect 4 0 6 0;
+#X connect 5 0 2 0;
+#X connect 6 0 2 1;
+#X connect 7 0 8 0;
+#X connect 8 0 2 2;
+#X connect 9 0 10 0;
+#X connect 10 0 2 3;

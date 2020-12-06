@@ -1,0 +1,22 @@
+#N canvas 592 105 566 630 12;
+#X text 37 15 vstplugin~ wrapper by hjh;
+#X obj 136 149 vstplug-hjh~ plugin_name 1;
+#X text 37 40 Automatically opens a VST plug-in with the given name.
+Uses the -e switch \, for the VST's native GUI. Currently there is
+no way to turn this off. If you don't want to use -e (for instance
+\, on Mac where the plugin's GUI runs in the audio thread) \, use [vstplugin~]
+directly.;
+#X text 37 250 Inlets:;
+#X text 37 272 1: Messages \, forwarded to the [vstplugin~] instance.
+('panic' is a special message that sends all notes off \, to channel
+1.);
+#X text 37 327 2-3: Signal inlets.;
+#X text 37 351 4: A symbol \, to load a different plug-in.;
+#X text 37 389 Outlets:;
+#X text 37 413 1-2: Signal outlets.;
+#X text 37 437 3: Messages from [vstplugin~].;
+#X text 37 482 Creation arguments:;
+#X text 37 506 1: A symbol \, for the name of the plug-in to load \,
+or 'ask' to get a file browser dialog.;
+#X text 37 543 2: 1 = automatically open the VST GUI after loading
+\; 0 = don't open it. (Default is 0.);

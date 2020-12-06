@@ -1,0 +1,85 @@
+#N canvas 537 86 573 641 12;
+#X obj 245 191 text define -k seq;
+#A set 0 60 100 \; 250 62 100 \; 250 67 100 \; 250 65 100 \; 250 62
+100 \; 250 76 800 \; 1000 \;;
+#X text 37 448 Argument: Text name;
+#N canvas 3 86 401 332 note 0;
+#X obj 96 31 inlet;
+#X obj 96 56 unpack 0 0;
+#X obj 96 81 makenote 64 100;
+#X msg 198 131 0 100;
+#X obj 198 181 line~;
+#X obj 96 131 mtof;
+#X obj 96 156 phasor~;
+#X obj 96 181 lop~ 1200;
+#X obj 138 231 *~;
+#X obj 138 256 outlet~;
+#X obj 198 106 moses 1;
+#X msg 244 131 1 10;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 1 1 2 2;
+#X connect 2 0 5 0;
+#X connect 2 1 10 0;
+#X connect 3 0 4 0;
+#X connect 4 0 8 1;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 7 0 8 0;
+#X connect 8 0 9 0;
+#X connect 10 0 3 0;
+#X connect 10 1 11 0;
+#X connect 11 0 4 0;
+#X restore 164 328 pd note;
+#X obj 232 283 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 164 353 *~ 0.2;
+#X obj 164 378 dac~;
+#X obj 150 96 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X msg 150 116 loop \$1;
+#X msg 213 116 reset;
+#X obj 198 303 print delta-to-next;
+#X obj 130 191 dataseq-hjh seq;
+#X text 37 478 Inlets: \; 1/ bang (next row) \, loop 1/0 \, reset \,
+or messages to [text sequence] \; 2/ Symbol (sequence name), f 69
+;
+#X obj 80 328 print raw;
+#X obj 119 303 print data;
+#X obj 130 96 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X text 36 18 dataseq-hjh: [text sequence] where the time outlet is
+"delta-to-next", f 71;
+#X obj 388 121 tgl 15 0 empty runswitch auto-next 17 7 0 10 -262144
+-1 -1 0 1;
+#X obj 349 349 spigot;
+#X obj 232 216 t b b;
+#X obj 349 374 delay;
+#X obj 349 399 s dshelpnext;
+#X obj 37 116 r dshelpnext;
+#X msg 264 241 \; runswitch 0;
+#X obj 403 319 r runswitch;
+#X text 36 44 In dataseq \, time control is up to you (see [delay]
+below);
+#X text 37 533 Outlets: \; 1/ Raw row from [text] \; 2/ Data list \;
+3/ Time delta to next event \; 4/ Bang at end;
+#X connect 2 0 4 0;
+#X connect 4 0 5 0;
+#X connect 4 0 5 1;
+#X connect 6 0 7 0;
+#X connect 7 0 10 0;
+#X connect 8 0 10 0;
+#X connect 10 0 12 0;
+#X connect 10 1 2 0;
+#X connect 10 1 13 0;
+#X connect 10 2 9 0;
+#X connect 10 2 17 0;
+#X connect 10 3 18 0;
+#X connect 14 0 10 0;
+#X connect 16 0 17 1;
+#X connect 17 0 19 0;
+#X connect 18 0 3 0;
+#X connect 18 1 22 0;
+#X connect 19 0 20 0;
+#X connect 21 0 10 0;
+#X connect 23 0 17 1;

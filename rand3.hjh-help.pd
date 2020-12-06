@@ -1,0 +1,30 @@
+#N canvas 545 104 540 417 12;
+#X text 43 27 rand3: Produce a triplet of random numbers \, with "granularity"
+, f 63;
+#X obj 89 191 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 89 211 rand3.hjh 1 100;
+#X text 204 211 0 <= x < 1 \, with steps = 0.01;
+#X obj 89 236 print;
+#X obj 143 102 hsl 128 15 1 127 0 0 empty empty rangetop -2 -8 0 10
+-262144 -1 -1 3000 1;
+#X obj 194 142 hsl 128 15 1 100 0 0 empty empty granularity -2 -8 0
+10 -262144 -1 -1 1200 1;
+#X obj 191 162 int;
+#X floatatom 191 187 5 0 0 0 - - -;
+#X floatatom 140 187 5 0 0 0 - - -;
+#X obj 140 162 int;
+#X text 45 283 Arguments: 1/ Upper bound \, 2/ divisions of the integer
+;
+#X text 44 311 Inlets: 1/ bang \, 2/ upper bound \, 3/ integer divisions
+;
+#X text 44 339 Outlet: List of three random numbers;
+#X text 44 54 Suitable for color values in Gem or Ofelia;
+#X connect 1 0 2 0;
+#X connect 2 0 4 0;
+#X connect 5 0 10 0;
+#X connect 6 0 7 0;
+#X connect 7 0 8 0;
+#X connect 8 0 2 2;
+#X connect 9 0 2 1;
+#X connect 10 0 9 0;

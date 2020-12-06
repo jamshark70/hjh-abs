@@ -1,0 +1,64 @@
+#N canvas 537 86 573 641 12;
+#X obj 236 191 text define -k seq;
+#A set 0 60 100 \; 250 62 100 \; 250 67 100 \; 250 65 100 \; 250 62
+100 \; 250 76 800 \; 1000 \;;
+#X obj 121 191 seq-hjh seq;
+#X text 53 448 Argument: Text name;
+#X text 53 478 Inlets: \; 1/ 1/0 start/stop \, loop 1/0 \, reset \,
+or messages to [text sequence] \; 2/ Symbol (sequence name), f 69
+;
+#X text 53 533 Outlets: \; 1/ Data list \; 2/ Time delta to next event
+\; 3/ Bang at end;
+#N canvas 3 86 401 332 note 0;
+#X obj 96 31 inlet;
+#X obj 96 56 unpack 0 0;
+#X obj 96 81 makenote 64 100;
+#X msg 198 131 0 100;
+#X obj 198 181 line~;
+#X obj 96 131 mtof;
+#X obj 96 156 phasor~;
+#X obj 96 181 lop~ 1200;
+#X obj 138 231 *~;
+#X obj 138 256 outlet~;
+#X obj 198 106 moses 1;
+#X msg 244 131 1 10;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 1 1 2 2;
+#X connect 2 0 5 0;
+#X connect 2 1 10 0;
+#X connect 3 0 4 0;
+#X connect 4 0 8 1;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 7 0 8 0;
+#X connect 8 0 9 0;
+#X connect 10 0 3 0;
+#X connect 10 1 11 0;
+#X connect 11 0 4 0;
+#X restore 121 301 pd note;
+#X obj 71 301 print;
+#X obj 224 256 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 121 326 *~ 0.2;
+#X obj 121 351 dac~;
+#X obj 121 96 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 141 96 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X msg 141 116 loop \$1;
+#X msg 204 116 reset;
+#X text 52 29 seq-hjh: [text sequence] where the time outlet is "delta-to-next"
+, f 67;
+#X obj 172 276 print delta-to-next;
+#X connect 1 0 6 0;
+#X connect 1 0 5 0;
+#X connect 1 1 15 0;
+#X connect 1 2 7 0;
+#X connect 5 0 8 0;
+#X connect 8 0 9 0;
+#X connect 8 0 9 1;
+#X connect 10 0 1 0;
+#X connect 11 0 12 0;
+#X connect 12 0 1 0;
+#X connect 13 0 1 0;
