@@ -11,5 +11,8 @@ A small collection of only loosely maintained Pure Data utility abstractions.
 - pm-hjh~.pd: Phase modulation oscillator.
 - rand3.hjh.pd: Triplet of random numbers.
 - seq-hjh.pd: Timed sequencer.
+- sf-scale-ms.pd: Adapt ms for file sample rate.
+- sf-startmsgd.pd: "Start" message for [play~].
+- sf-startmsg.pd: "Start" message for [play~].
+- soundfiler2.pd: Soundfiler with more stats.
 - vstplug-hjh~.pd: Wrapper for vstplugin~.
-

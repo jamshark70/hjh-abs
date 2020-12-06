@@ -1,0 +1,25 @@
+#N canvas 541 86 531 501 12;
+#X text 43 26 sf-scale-ms: Scale a time index in ms according to a
+file's sample rate;
+#X text 43 71 Pd assumes that an array containing audio data is at
+the same sample rate as the system. A file loaded from disk may be
+at a different rate. Objects such as [cyclone/play~] will access the
+wrong part of the buffer \, without scaling: file_ms = real_ms * file_rate
+/ system_rate.;
+#X text 43 163 If you have loaded the array using [soundfiler2] \,
+this object will perform scaling with no further intervention.;
+#X text 44 356 Argument: An identifier for the [value] objects.;
+#X text 43 377 Inlets:;
+#X text 56 397 1 A time index in true ms.;
+#X text 43 423 Outlet: A time index in "file-ms.";
+#X obj 50 247 soundfiler2 a1;
+#X obj 157 247 array define a1;
+#X msg 50 222 read -resize computers.wav a1;
+#X floatatom 296 223 5 0 0 0 - - -;
+#X obj 296 247 sf-scale-ms a1;
+#X floatatom 296 272 5 0 0 0 - - -;
+#X text 43 305 File SR is 22050 \; If your system is 44.1 kHz \, scaled
+ms should be half.;
+#X connect 9 0 7 0;
+#X connect 10 0 11 0;
+#X connect 11 0 12 0;
