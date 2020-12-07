@@ -11,15 +11,16 @@
 #X obj 355 61 loadbang;
 #X msg 346 111 symbol \$1scale;
 #X obj 346 136 t b a;
-#X obj 346 161 value;
+#X obj 346 276 value;
 #X obj 99 186 +;
-#X obj 99 286 * 1;
-#X obj 67 286 * 1;
-#X obj 67 347 pack 0 0 0;
-#X msg 67 372 start \$1 \$2 \$3;
-#X obj 67 397 outlet;
+#X obj 99 343 * 1;
+#X obj 67 343 * 1;
+#X obj 67 404 pack 0 0 0;
+#X msg 67 429 start \$1 \$2 \$3;
+#X obj 67 454 outlet;
 #X obj 67 61 unpack 0 0 0, f 23;
 #X msg 258 111 1;
+#X obj 99 228 t f b;
 #X connect 0 0 19 0;
 #X connect 1 0 4 0;
 #X connect 2 0 5 1;
@@ -37,7 +38,7 @@
 #X connect 11 1 12 1;
 #X connect 12 0 14 1;
 #X connect 12 0 15 1;
-#X connect 13 0 14 0;
+#X connect 13 0 21 0;
 #X connect 14 0 16 1;
 #X connect 15 0 16 0;
 #X connect 16 0 17 0;
@@ -46,3 +47,5 @@
 #X connect 19 1 4 0;
 #X connect 19 2 5 1;
 #X connect 20 0 5 1;
+#X connect 21 0 14 0;
+#X connect 21 1 12 0;
