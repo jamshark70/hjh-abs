@@ -1,0 +1,22 @@
+#N canvas 461 264 450 300 12;
+#X obj 31 116 select 0 1;
+#X msg 64 146 create \, 1;
+#X obj 31 50 tgl 22 0 empty empty empty 17 7 0 10 -262144 -1 -1 1 1
+;
+#X msg 31 176 0 \, destroy;
+#X obj 31 207 gemwin;
+#X obj 58 50 tgl 22 0 empty empty empty 17 7 0 10 -262144 -1 -1 0 1
+;
+#X msg 145 146 lighting \$1;
+#X obj 236 146 inlet;
+#X obj 31 237 outlet;
+#X connect 0 0 3 0;
+#X connect 0 1 1 0;
+#X connect 1 0 4 0;
+#X connect 2 0 0 0;
+#X connect 3 0 4 0;
+#X connect 4 0 8 0;
+#X connect 5 0 6 0;
+#X connect 6 0 4 0;
+#X connect 7 0 4 0;
+#X coords 0 -1 1 1 60 60 1 25 23;
