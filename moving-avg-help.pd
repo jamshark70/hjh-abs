@@ -1,7 +1,6 @@
 #N canvas 586 102 519 600 12;
 #X text 51 27 moving-avg: A control-rate smoothing filter;
 #X text 51 482 Argument: Length of circular buffer (default 10);
-#X text 50 512 Inlets: L = One datum \, R = bang to reset;
 #X text 50 540 Outlet: Moving average result;
 #N canvas 0 50 450 250 (subpatch) 0;
 #X array raw 100 float 4;
@@ -11,7 +10,7 @@
 #X array smooth 100 float 4;
 #X coords 0 100 100 0 200 140 1 0 0;
 #X restore 273 313 graph;
-#X obj 143 60 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 143 60 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
 1;
 #X obj 143 80 metro 50;
 #X obj 143 105 t b b;
@@ -24,17 +23,26 @@
 #X obj 96 155 t f f;
 #X obj 73 223 moving-avg 20;
 #X obj 96 130 random 100;
+#X text 50 512 Inlets: L = One datum \, R = bang to reset or float
+to resize;
+#X obj 309 123 cnv 15 134 60 empty empty empty 20 12 0 14 -204786 -66577
+0;
+#X obj 360 160 bng 15 250 50 0 empty empty just-reset 17 7 0 10 -262144
+-1 -1;
+#X floatatom 318 156 5 1 100 2 resize-and-reset - -;
+#X connect 5 0 6 0;
 #X connect 6 0 7 0;
-#X connect 7 0 8 0;
-#X connect 8 0 17 0;
-#X connect 8 1 9 0;
-#X connect 9 0 10 0;
-#X connect 10 0 14 1;
-#X connect 10 1 13 1;
-#X connect 10 2 11 0;
-#X connect 11 0 12 0;
-#X connect 12 0 9 1;
-#X connect 15 0 16 0;
-#X connect 15 1 13 0;
+#X connect 7 0 16 0;
+#X connect 7 1 8 0;
+#X connect 8 0 9 0;
+#X connect 9 0 13 1;
+#X connect 9 1 12 1;
+#X connect 9 2 10 0;
+#X connect 10 0 11 0;
+#X connect 11 0 8 1;
+#X connect 14 0 15 0;
+#X connect 14 1 12 0;
+#X connect 15 0 13 0;
 #X connect 16 0 14 0;
-#X connect 17 0 15 0;
+#X connect 19 0 15 1;
+#X connect 20 0 15 1;
