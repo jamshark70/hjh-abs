@@ -1,0 +1,41 @@
+#N canvas 649 93 512 618 12;
+#X text 47 18 midimonoglide - hjh;
+#X obj 122 141 notein, f 25;
+#X obj 122 166 midimonoglide;
+#X obj 122 191 mtof;
+#X obj 122 295 osc~;
+#X obj 258 216 select 1 0;
+#X text 47 50 Massages note number and velocity streams into monophonic
+synth control messages. Last-held note is always the sounding note.
+Use in conjunction with [noteglide] to slide between held notes.;
+#X obj 258 295 vline~;
+#X obj 122 376 dac~;
+#X msg 258 241 1 10 \, 0.4 70 10;
+#X obj 122 326 *~, f 6;
+#X msg 291 266 0 70;
+#X text 258 193 ADSR driven by gate outlet;
+#X text 47 432 Inlets:;
+#X text 46 453 1 MIDI note number \; 2 Velocity;
+#X text 46 498 Outlets:;
+#X text 46 519 1 MIDI note number (latest held) \; 2 Velocity (passthrough)
+\; 3 Gate: 1 to trigger envelope attack \, 0 for release \; 4 Glide
+flag: 1 when glide is needed \, 0 when not.;
+#X obj 122 351 *~ 1;
+#X obj 122 216 noteglide 50;
+#X text 223 405 NOTE: Depends on cyclone externals!;
+#X connect 1 0 2 0;
+#X connect 1 1 2 1;
+#X connect 2 0 3 0;
+#X connect 2 2 5 0;
+#X connect 2 3 18 1;
+#X connect 3 0 18 0;
+#X connect 4 0 10 0;
+#X connect 5 0 9 0;
+#X connect 5 1 11 0;
+#X connect 7 0 10 1;
+#X connect 9 0 7 0;
+#X connect 10 0 17 0;
+#X connect 11 0 7 0;
+#X connect 17 0 8 0;
+#X connect 17 0 8 1;
+#X connect 18 0 4 0;

@@ -1,0 +1,41 @@
+#N canvas 651 93 521 617 12;
+#X text 43 29 noteglide - hjh;
+#X obj 183 134 midimonoglide;
+#X text 44 384 Argument:;
+#X text 43 403 1 Glide time in ms.;
+#X text 43 435 Inlets:;
+#X text 43 59 Given a pitch value (any unit) and "glide flag" from
+[midimonoglide] \, [noteglide] produces a linear ramp toward the new
+pitch (but only when fingered portamento is needed \, per the flag).
+See [midimonoglide] help for a usage example.;
+#X text 44 164 This feature is separated out from [midimonoglide] because
+your logic to convert MIDI note number to frequency may not be compatible
+with a signal outlet. So \, you can write your own conversion logic
+*before* producing the glide.;
+#X text 44 513 Outlets:;
+#X text 43 533 1 Signal outlet for the pitch ramp \; 2 List "pitch_value
+ramp_time" suitable to feed into [line~].;
+#X obj 183 319 noteglide 500;
+#X text 43 454 1 Pitch value (MIDI note number \, Hz \, anything) \;
+2 Glide flag (from [midimonoglide]) \; 3 Glide time (in ms).;
+#X obj 227 299 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X obj 128 274 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 128 294 random 24;
+#X obj 128 319 + 48;
+#X obj 283 319 metro 20;
+#X obj 283 344 snapshot~;
+#X obj 286 369 hsl 128 15 48 72 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 6879 1;
+#X msg 283 269 1 \; pd dsp 1;
+#X obj 283 244 loadbang;
+#X connect 9 0 16 0;
+#X connect 11 0 9 1;
+#X connect 12 0 13 0;
+#X connect 13 0 14 0;
+#X connect 14 0 9 0;
+#X connect 15 0 16 0;
+#X connect 16 0 17 0;
+#X connect 18 0 15 0;
+#X connect 19 0 18 0;
