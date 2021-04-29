@@ -11,7 +11,7 @@ else \, forward to text;
 #X msg 528 108 symbol \$1;
 #X obj 496 33 loadbang;
 #X obj 307 521 outlet;
-#X obj 256 521 outlet;
+#X obj 256 579 outlet;
 #X obj 367 471 delay;
 #X obj 367 496 spigot 1;
 #X obj 18 61 tgl 15 0 empty empty run 17 7 0 10 -262144 -1 -1 0 1;
@@ -59,7 +59,7 @@ else \, forward to text;
 #X msg 327 399 1;
 #X obj 184 348 r \$0-run-t;
 #X msg 184 373 0;
-#X text 24 472 play/stop logic \; wait time bangs data \; first data
+#X text 11 465 play/stop logic \; wait time bangs data \; first data
 point is invalid \; so \, play/stop status change \; sets 0 on the
 spigot \; a data point sets the spigot \; to be opened *next time*
 ;
@@ -68,6 +68,8 @@ spigot \; a data point sets the spigot \; to be opened *next time*
 #X obj 685 521 s \$0-banglist;
 #X obj 561 33 inlet textname;
 #X obj 528 133 t b a;
+#X obj 256 546 route bang;
+#X text 334 546 filter out empty-list 'bang';
 #X connect 0 0 41 0;
 #X connect 2 0 19 0;
 #X connect 3 0 5 0;
@@ -114,7 +116,7 @@ spigot \; a data point sets the spigot \; to be opened *next time*
 #X connect 47 0 2 0;
 #X connect 48 0 47 0;
 #X connect 48 1 6 0;
-#X connect 50 0 10 0;
+#X connect 50 0 64 0;
 #X connect 51 0 50 0;
 #X connect 52 0 51 1;
 #X connect 53 0 51 0;
@@ -133,4 +135,5 @@ spigot \; a data point sets the spigot \; to be opened *next time*
 #X connect 62 0 7 0;
 #X connect 63 0 3 0;
 #X connect 63 1 5 1;
+#X connect 64 1 10 0;
 #X coords 0 -1 1 1 110 60 1 5 25;
