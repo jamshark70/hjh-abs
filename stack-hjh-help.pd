@@ -1,0 +1,16 @@
+#N canvas 500 106 536 626 12;
+#X text 52 46 [stack-hjh] is a LIFO \, well \, stack.;
+#X msg 124 223 pop \, pop \, push 72 \, pop \, pop \, pop \, pop;
+#X msg 163 289 clear;
+#X obj 66 369 stack-hjh;
+#X obj 66 394 print;
+#X msg 66 131 push 100 \, push 300 \, push 500 \, push symbol xyz;
+#X text 69 104 No output from the stack for 'push' messages;
+#X text 120 184 'pop' returns items in reverse order \; after the last
+item \, 'pop' returns 'bang';
+#X text 217 289 empty the stack (no output);
+#X text 68 448 A number without 'push' will be pushed anyway.;
+#X connect 1 0 3 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 5 0 3 0;
