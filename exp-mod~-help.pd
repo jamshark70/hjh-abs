@@ -1,39 +1,39 @@
 #N canvas 535 123 561 590 12;
 #X obj 57 100 hsl 128 15 40 4000 1 1 empty empty freq -2 -8 0 10 -262144
--1 -1 6900 1;
+-1 -1 6100 1;
 #X floatatom 54 120 5 0 0 0 - - -;
 #X msg 54 144 \$1 30;
 #X obj 54 169 line~;
 #X obj 53 283 osc~;
 #X obj 53 353 dac~;
-#X obj 368 150 hsl 128 15 -1 2 0 0 empty empty mod_depth -2 -8 0 10
--262144 -1 -1 5600 1;
+#X obj 368 150 hsl 128 15 -2 2 0 0 empty empty mod_depth -2 -8 0 10
+-262144 -1 -1 4800 1;
 #X floatatom 365 170 5 0 0 0 - - -;
 #X obj 209 169 phasor~ 1;
 #X text 207 84 LFO: Range is normalized: \; 0..1 for unipolar modulation
 \; -1..+1 for bipolar mod;
-#X obj 92 283 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 92 283 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
 1;
 #X obj 92 303 * 0.1;
 #X text 46 30 exp-mod~: Apply modulation exponentially to an input
 signal value;
 #X obj 53 233 exp-mod~ 0.5, f 45;
+#X obj 53 328 *~ 0, f 6;
 #X text 53 404 Inlets: \; 1 The value or signal to be modulated \;
 2 A modulator signal. Range should be normalized \; 3 Modulation depth.
-0 = no mod. 1 \, output range is 0.5*in - 2*in \; "Reciprocal - 1"
-depth will invert the modulator. \; Avoid depth < -1 \; \; Outlet:
-The modulated value., f 68;
-#X obj 53 328 *~ 0, f 6;
+0 = no mod. 1 = one octave up or down (*2 \, *0.5). -1 = one octave
+\, inverted. +/-2 = 2 octaves etc. \; Outlet: The modulated value.
+, f 68;
 #X connect 0 0 1 0;
 #X connect 1 0 2 0;
 #X connect 2 0 3 0;
 #X connect 3 0 13 0;
-#X connect 4 0 15 0;
+#X connect 4 0 14 0;
 #X connect 6 0 7 0;
 #X connect 7 0 13 2;
 #X connect 8 0 13 1;
 #X connect 10 0 11 0;
-#X connect 11 0 15 1;
+#X connect 11 0 14 1;
 #X connect 13 0 4 0;
-#X connect 15 0 5 0;
-#X connect 15 0 5 1;
+#X connect 14 0 5 0;
+#X connect 14 0 5 1;
