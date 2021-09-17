@@ -9,9 +9,6 @@
 #X floatatom 240 229 5 0 0 0 - - -;
 #X text 342 189 'value' variables are populated internally by [soundfiler2]
 , f 25;
-#X text 61 18 monofile: automatically load a stereo soundfile into
-two arrays (name_LEFT and name_RIGHT) \, keeping stats with soundfiler2
--- hjh;
 #X obj 65 102 stereofile sf1 computers.wav 0 -1;
 #X text 313 86 This creates two tables (sf1_LEFT and sf1_RIGHT) and
 also a [soundfiler2 sf1]. Use sf1*** tags for [value] boxes. sf-play2
@@ -27,9 +24,12 @@ of frames to read - '-1' is treated specially as "read to end of file"
 (but only -1 \, not all negative numbers) \; \; Inlet: A list giving
 path \, start frame \, numframes \, to refill the table from disk \;
 \; Outlet: Same as [soundfiler2] (soundfile stats)., f 63;
-#X connect 0 0 10 0;
+#X text 61 18 stereofile: automatically load a stereo soundfile into
+two arrays (name_LEFT and name_RIGHT) \, keeping stats with soundfiler2
+-- hjh;
+#X connect 0 0 9 0;
 #X connect 3 0 4 0;
 #X connect 4 0 5 0;
-#X connect 10 0 1 0;
-#X connect 10 1 1 1;
-#X connect 10 2 2 0;
+#X connect 9 0 1 0;
+#X connect 9 1 1 1;
+#X connect 9 2 2 0;
