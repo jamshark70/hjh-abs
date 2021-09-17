@@ -1,0 +1,35 @@
+#N canvas 582 125 637 579 12;
+#X msg 65 179 all;
+#X obj 81 245 dac~;
+#X obj 181 229 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 240 184 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 240 204 value sf1dur;
+#X floatatom 240 229 5 0 0 0 - - -;
+#X text 342 189 'value' variables are populated internally by [soundfiler2]
+, f 25;
+#X text 61 18 monofile: automatically load a stereo soundfile into
+two arrays (name_LEFT and name_RIGHT) \, keeping stats with soundfiler2
+-- hjh;
+#X obj 65 102 stereofile sf1 computers.wav 0 -1;
+#X text 313 86 This creates two tables (sf1_LEFT and sf1_RIGHT) and
+also a [soundfiler2 sf1]. Use sf1*** tags for [value] boxes. sf-play2
+will look for the L and R tables., f 38;
+#X obj 65 204 sf-play2~ sf1 200;
+#X text 63 478 Note that 'computers.wav' is mono \, so sf1_RIGHT will
+be empty and you will hear only the left channel. \; \; Try substituting
+your own stereo file.;
+#X text 62 281 Arguments: \; 1 Table name - this CANNOT BE CHANGED
+later - must be given at creation time \; 2 Path to a mono soundfile
+(only first channel is read) \; 3 Start frame (default 0) \; 4 Number
+of frames to read - '-1' is treated specially as "read to end of file"
+(but only -1 \, not all negative numbers) \; \; Inlet: A list giving
+path \, start frame \, numframes \, to refill the table from disk \;
+\; Outlet: Same as [soundfiler2] (soundfile stats)., f 63;
+#X connect 0 0 10 0;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 10 0 1 0;
+#X connect 10 1 1 1;
+#X connect 10 2 2 0;
