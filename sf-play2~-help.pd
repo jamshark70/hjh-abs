@@ -1,19 +1,19 @@
 #N canvas 582 125 622 582 12;
-#X msg 65 143 all;
-#X obj 81 269 dac~;
-#X msg 112 143 200 700 0.5;
-#X text 210 128 start 200ms \; end 700ms \; rate 0.5 of normal;
-#X msg 112 172 stop;
-#X obj 181 235 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X msg 163 143 all;
+#X obj 179 269 dac~;
+#X msg 210 143 200 700 0.5;
+#X text 308 128 start 200ms \; end 700ms \; rate 0.5 of normal;
+#X msg 210 172 stop;
+#X obj 279 235 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X obj 65 89 stereofile sf1 computers.wav;
-#X obj 65 210 sf-play2~ sf1 200;
+#X obj 163 210 sf-play2~ sf1 200;
 #X text 298 59 this is a mono file. \; so you'll hear only the left
 speaker \; substitute your own stereo file.;
 #X text 61 18 sf-play2~: Play "start" ms to "end" ms at a given rate
 \, with trapezoidal envelope \, from table_LEFT and table_RIGHT --
 hjh;
-#X text 133 306 Inlets: \; 1 'all' \, or 'stop' \, or a float for start
+#X text 92 306 Inlets: \; 1 'all' \, or 'stop' \, or a float for start
 time (ms) \, or a list 'start end rate' \, other messages forwarded
 to play~ \; 2 float = end time (cold) \; 3 float = rate (cold) - 1
 = normal speed \; 4 Envelope attack and release time (ms) \; 5 'symbol
@@ -21,9 +21,14 @@ tablename' - should also match soundfiler2 \; \; Outlets: \; 1-2 Stereo
 signal \; 3 bang when finished \; \; Arguments: \; 1 Table name (should
 match a soundfiler2 instance) - recommended to use [monofile] or [stereofile]
 \; 2 Envelope A/R time \, default is 10 ms;
+#X obj 95 148 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X msg 95 168 loop \$1;
 #X connect 0 0 7 0;
 #X connect 2 0 7 0;
 #X connect 4 0 7 0;
 #X connect 7 0 1 0;
 #X connect 7 1 1 1;
 #X connect 7 2 5 0;
+#X connect 11 0 12 0;
+#X connect 12 0 7 0;
