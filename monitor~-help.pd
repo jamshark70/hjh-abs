@@ -1,0 +1,9 @@
+#N canvas 550 109 463 442 12;
+#X text 54 35 monitor~: View numbers from a signal - hjh;
+#X obj 58 107 osc~ 0.5;
+#X msg 170 107 \; pd dsp 1;
+#X obj 58 161 monitor~ -1 1;
+#X text 67 275 Inlets: \; 1 Signal input \; 2 On/off switch (nonzero
+= on \, zero = off) \; \; Arguments: low and high ranges for the slider
+;
+#X connect 1 0 3 0;
