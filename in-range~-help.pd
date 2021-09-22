@@ -1,6 +1,4 @@
 #N canvas 577 116 493 590 12;
-#X text 56 31 in-range~: Outputs 1 if the input signal is between (non-inclusive)
-low and high endpoints \, 0 otherwise;
 #X obj 58 109 osc~ 0.25;
 #X obj 58 209 monitor~ -1 1;
 #X obj 249 184 in-range~ -0.5 0.5;
@@ -12,6 +10,8 @@ So this object is intended to detect a moving signal crossing into
 or out of the given range. \; \; Inlets: \; 1 Signal input \; 2 Low
 boundary (control inlet) \; 3 High boundary (control inlet) \; \; Arguments:
 low and high boundaries (default -1 .. +1);
-#X connect 1 0 2 0;
-#X connect 1 0 3 0;
-#X connect 3 0 4 0;
+#X text 56 31 in-range~: Outputs 1 if the input signal is between (non-inclusive)
+low and high endpoints \, 0 otherwise - hjh;
+#X connect 0 0 1 0;
+#X connect 0 0 2 0;
+#X connect 2 0 3 0;
