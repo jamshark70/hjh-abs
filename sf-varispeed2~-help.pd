@@ -1,0 +1,55 @@
+#N canvas 531 93 548 659 12;
+#X obj 451 79 vsl 15 128 20 800 0 0 empty empty xfade(ms) 0 -9 0 10
+-262144 -1 -1 0 1;
+#X obj 44 313 dac~, f 9;
+#X msg 44 139 all;
+#X msg 79 139 stop;
+#X obj 121 119 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X msg 121 139 loop \$1;
+#X msg 157 164 300 500;
+#X floatatom 451 215 5 0 0 0 - - -;
+#X msg 157 189 300 500 0.5;
+#X msg 157 214 300 500 1;
+#X obj 266 94 nbx 5 14 1 3 1 1 empty empty mod_depth 0 -8 0 10 -262144
+-1 -1 3 256;
+#X obj 266 113 sig~;
+#X obj 265 214 pow~, f 10;
+#X obj 333 113 *~ 2;
+#X obj 333 138 -~ 1;
+#X obj 333 88 phasor~ 0.8;
+#X obj 167 301 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X msg 17 114 set sf1;
+#X obj 44 72 stereofile sf1 computers.wav;
+#X obj 44 276 sf-varispeed2~ sf1;
+#X text 40 19 sf-varispeed2~: Play a stereo buffer with a rate modulation
+signal;
+#X text 45 358 Inlets: \; 1 Control messages all \, stop \, loop 1/0
+\, set ID \, or lists giving start (ms) \, end (ms) and rate-multiplier
+\; 2 Rate modulator signal. 1 = normal speed. It's up to you to center
+the modulator around 1 \; 3 Envelope time (attack \, release \, crossfade
+for looping) \; \; Outlets: \; 1-2 Left and right signals \; 2 Bang
+at end (after fade-out) \; \; Arguments: \; 1 Buffer ID (should match
+an instance of [monofile]) \; 2 Initial envelope time \; \; Note: In
+this example \, the soundfile is mono \, so you will hear only the
+left channel. Substitute a stereo file and it will work.;
+#X connect 0 0 7 0;
+#X connect 2 0 19 0;
+#X connect 3 0 19 0;
+#X connect 4 0 5 0;
+#X connect 5 0 19 0;
+#X connect 6 0 19 0;
+#X connect 7 0 19 2;
+#X connect 8 0 19 0;
+#X connect 9 0 19 0;
+#X connect 10 0 11 0;
+#X connect 11 0 12 0;
+#X connect 12 0 19 1;
+#X connect 13 0 14 0;
+#X connect 14 0 12 1;
+#X connect 15 0 13 0;
+#X connect 17 0 19 0;
+#X connect 19 0 1 0;
+#X connect 19 1 1 1;
+#X connect 19 2 16 0;
