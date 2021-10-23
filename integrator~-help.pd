@@ -1,0 +1,57 @@
+#N canvas 565 105 686 600 12;
+#X text 46 30 integrator~: Signal-rate integrator with control-message
+trigger -- hjh 2021, f 77;
+#X obj 128 111 t b b, f 20;
+#X obj 128 172 value i_sfscale;
+#X obj 53 247 integrator~;
+#X obj 168 298 threshold~;
+#X obj 265 172 value i_sfframes;
+#X obj 265 197 - 1;
+#X obj 168 323 send resettrig;
+#X obj 127 222 r resettrig;
+#X obj 53 298 tabread4~ i_sf;
+#X obj 53 323 *~ 0.2;
+#X obj 53 388 dac~;
+#X msg 265 222 set \$1 0 100 0;
+#X obj 361 71 tgl 35 0 audio_on empty audio_on 37 7 0 10 -262144 -1
+-1 0 1;
+#X obj 53 348 *~ 0, f 6;
+#X obj 104 348 r audio_on;
+#X obj 361 111 bng 35 250 50 0 empty empty manual_trig 37 7 0 10 -262144
+-1 -1;
+#X obj 401 126 s resettrig;
+#X obj 44 129 cnv 15 62 85 empty empty empty 20 12 0 14 -261682 -66577
+0;
+#X obj 53 187 +~ 1;
+#X obj 53 222 *~, f 4;
+#X text 311 277 In orange is the playback rate \; = 1 + a modulator
+\; \; Then this is scaled for the file's sample rate \; \; Integrating
+this produces the frame index to play back with tabread4~, f 48;
+#X text 53 440 Argument: (optional) float = reset value \; \; Inlets:
+\; 1 The signal to integrate \; 2 "bang" to reset to the previous reset
+level \, or a float to change the reset level and reset immediately
+\; \; Outlet: The running sum (integration) of the input, f 74;
+#X obj 128 86 monofile i_sf computers.wav;
+#X obj 53 162 *~ 0.2;
+#X obj 53 137 osc~ 3;
+#X connect 1 0 2 0;
+#X connect 1 1 5 0;
+#X connect 2 0 20 1;
+#X connect 3 0 4 0;
+#X connect 3 0 9 0;
+#X connect 4 0 7 0;
+#X connect 5 0 6 0;
+#X connect 6 0 12 0;
+#X connect 8 0 3 1;
+#X connect 9 0 10 0;
+#X connect 10 0 14 0;
+#X connect 12 0 4 0;
+#X connect 14 0 11 0;
+#X connect 14 0 11 1;
+#X connect 15 0 14 1;
+#X connect 16 0 17 0;
+#X connect 19 0 20 0;
+#X connect 20 0 3 0;
+#X connect 23 0 1 0;
+#X connect 24 0 19 0;
+#X connect 25 0 24 0;
