@@ -29,7 +29,8 @@ signal;
 \, set ID \, or lists giving start (ms) \, end (ms) and rate-multiplier
 \; 2 Rate modulator signal. 1 = normal speed. It's up to you to center
 the modulator around 1 \; 3 Envelope time (attack \, release \, crossfade
-for looping) \; \; Outlets: \; 1 Signal \; 2 Bang at end (after fade-out)
+for looping) \; \; Outlets: \; 1 Signal \; 2 Bang at end (after fade-out \,
+and after every loop cycle)
 \; \; Arguments: \; 1 Buffer ID (should match an instance of [monofile])
 \; 2 Initial envelope time;
 #X connect 2 0 4 0;
