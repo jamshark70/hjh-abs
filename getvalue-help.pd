@@ -1,0 +1,50 @@
+#N canvas 561 93 662 649 12;
+#X declare -path hjh-abs;
+#X text 51 26 getvalue: read-only access to a [value] object declared
+elsewhere - hjh, f 74;
+#X text 50 59 [value] objects are fragile: accidentally sending a float
+to the left inlet erases the old value., f 59;
+#X text 50 107 [getvalue] protects a [value] defined somewhere else
+\, by rejecting any input that is not 'bang'.;
+#X obj 453 298 loadbang;
+#X text 51 155 In particular \, this is useful for the [value] objects
+created by [soundfiler2] \, [monofile] and [stereofile]. As these describe
+properties of an audio buffer \, you do not want to overwrite them.
+[getvalue] prevents accidental overwrites.;
+#X msg 453 323 1;
+#X obj 453 348 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X obj 453 368 metro 500;
+#X obj 453 393 random 100;
+#X floatatom 453 418 5 0 0 0 - - -;
+#X obj 106 257 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text 127 254 'bang' is valid to access the value;
+#X obj 453 252 declare -path hjh-abs;
+#X obj 453 442 value gv-help;
+#X obj 106 368 getvalue gv-help;
+#X floatatom 106 393 5 0 0 0 - - -;
+#X msg 132 298 500;
+#X text 164 298 float would overwrite \, but is rejected;
+#X obj 215 393 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text 232 390 'bang' on error;
+#X text 52 444 Argument: symbol = name of [value] to access;
+#X text 51 475 Inlets: \; 1 Bang only. All other data print an error.
+\; 2 Symbol = change to a different [value].;
+#X text 51 537 Outlets: \; 1 The float belonging to the source [value]
+(upon 'bang' only). \; 2 'bang' if wrong data were put into the left
+inlet., f 67;
+#X msg 132 332 list abc def xyz;
+#X text 260 332 nonsense: also error;
+#X connect 3 0 5 0;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 7 0 8 0;
+#X connect 8 0 9 0;
+#X connect 9 0 13 0;
+#X connect 10 0 14 0;
+#X connect 14 0 15 0;
+#X connect 14 1 18 0;
+#X connect 16 0 14 0;
+#X connect 23 0 14 0;
