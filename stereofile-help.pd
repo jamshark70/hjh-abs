@@ -5,10 +5,7 @@
 -1 -1;
 #X obj 240 184 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj 240 204 value sf1dur;
 #X floatatom 240 229 5 0 0 0 - - -;
-#X text 342 189 'value' variables are populated internally by [soundfiler2]
-, f 25;
 #X obj 65 102 stereofile sf1 computers.wav 0 -1;
 #X text 313 86 This creates two tables (sf1_LEFT and sf1_RIGHT) and
 also a [soundfiler2 sf1]. Use sf1*** tags for [value] boxes. sf-play2
@@ -27,9 +24,12 @@ path \, start frame \, numframes \, to refill the table from disk \;
 #X text 61 18 stereofile: automatically load a stereo soundfile into
 two arrays (name_LEFT and name_RIGHT) \, keeping stats with soundfiler2
 -- hjh;
-#X connect 0 0 9 0;
-#X connect 3 0 4 0;
-#X connect 4 0 5 0;
-#X connect 9 0 1 0;
-#X connect 9 1 1 1;
-#X connect 9 2 2 0;
+#X text 371 176 'value' variables are populated internally by [soundfiler2].
+Use [getvalue] to prevent accidental overwrites., f 25;
+#X obj 240 204 getvalue sf1dur;
+#X connect 0 0 7 0;
+#X connect 3 0 12 0;
+#X connect 7 0 1 0;
+#X connect 7 1 1 1;
+#X connect 7 2 2 0;
+#X connect 12 0 4 0;
