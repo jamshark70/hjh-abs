@@ -1,4 +1,4 @@
-#N canvas 541 86 531 501 12;
+#N canvas 541 93 531 501 12;
 #X text 43 26 sf-scale-ms: Scale a time index in ms according to a
 file's sample rate;
 #X text 43 71 Pd assumes that an array containing audio data is at
@@ -12,11 +12,11 @@ this object will perform scaling with no further intervention.;
 #X text 43 377 Inlets:;
 #X text 56 397 1 A time index in true ms.;
 #X text 43 423 Outlet: A time index in "file-ms.";
-#X obj 50 247 soundfiler2 a1;
-#X obj 157 247 array define a1;
-#X msg 50 222 read -resize computers.wav a1;
+#X obj 50 247 soundfiler2 a1sc;
+#X obj 50 272 array define a1sc;
+#X msg 50 222 read -resize computers.wav a1sc;
 #X floatatom 296 223 5 0 0 0 - - -;
-#X obj 296 247 sf-scale-ms a1;
+#X obj 296 247 sf-scale-ms a1sc;
 #X floatatom 296 272 5 0 0 0 - - -;
 #X text 43 305 File SR is 22050 \; If your system is 44.1 kHz \, scaled
 ms should be half.;

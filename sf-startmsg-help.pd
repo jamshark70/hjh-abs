@@ -1,4 +1,4 @@
-#N canvas 541 86 510 650 12;
+#N canvas 541 93 510 650 12;
 #X declare -lib cyclone;
 #X text 36 58 Given a start and end time within the array (in ms) \,
 this object outputs a "start" list that you can feed to [cyclone/play~].
@@ -6,11 +6,11 @@ Assuming the array has been loaded by [soundfiler2] \, this will automatically
 adapt the times according to the file's sample rate.;
 #X text 37 451 Argument: An identifier for the [value] objects.;
 #X text 36 569 Outlet: A "start" message.;
-#X obj 39 212 soundfiler2 a1;
-#X obj 146 212 array define a1;
-#X msg 39 187 read -resize computers.wav a1;
+#X obj 39 212 soundfiler2 a1msg;
+#X obj 174 212 array define a1msg;
+#X msg 39 187 read -resize computers.wav a1msg;
 #X obj 39 162 declare -lib cyclone;
-#X text 259 187 <-- hit me first;
+#X text 280 187 <-- hit me first;
 #X obj 227 256 hsl 128 15 0.25 4 1 0 empty empty rate -2 -8 0 10 -262144
 -1 -1 0 1;
 #X floatatom 224 276 5 0 0 0 - - -;
@@ -18,9 +18,9 @@ adapt the times according to the file's sample rate.;
 #X obj 39 237 unpack 0 0;
 #X obj 124 288 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj 124 333 sf-startmsg a1;
-#X obj 245 358 print;
-#X obj 124 358 cyclone/play~ a1;
+#X obj 124 333 sf-startmsg a1msg;
+#X obj 275 358 print;
+#X obj 124 358 cyclone/play~ a1msg;
 #X obj 124 383 *~ 0.25;
 #X obj 124 408 dac~;
 #X text 36 27 sf-startmsg: Produce a "start" message for [cyclone/play~]

@@ -1,8 +1,8 @@
 #N canvas 531 93 548 646 12;
 #X text 40 19 sf-varispeed~: Play a mono buffer with a rate modulation
 signal;
-#X obj 44 72 monofile sf1 computers.wav;
-#X obj 44 276 sf-varispeed~ sf1;
+#X obj 44 72 monofile sfv computers.wav;
+#X obj 44 276 sf-varispeed~ sfv;
 #X obj 451 79 vsl 15 128 20 800 0 0 empty empty xfade(ms) 0 -9 0 10
 -262144 -1 -1 0 1;
 #X obj 44 313 dac~;
@@ -24,7 +24,7 @@ signal;
 #X obj 333 88 phasor~ 0.8;
 #X obj 160 301 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X msg 17 114 set sf1;
+#X msg 17 114 set sfv;
 #X text 45 358 Inlets: \; 1 Control messages all \, stop \, loop 1/0
 \, set ID \, or lists giving start (ms) \, end (ms) and rate-multiplier
 \; 2 Rate modulator signal. 1 = normal speed. It's up to you to center
