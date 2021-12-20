@@ -66,7 +66,7 @@
 #X obj 47 437 play~, f 36;
 #X msg 419 383 set \$1;
 #X obj 135 383 sf-startmsg;
-#X obj 373 137 t s s s;
+#X obj 373 137 t a a a;
 #X obj 47 462 *~, f 30;
 #X obj 296 511 outlet;
 #X obj 47 511 outlet~;
