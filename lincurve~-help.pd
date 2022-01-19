@@ -1,0 +1,43 @@
+#N canvas 528 58 681 587 12;
+#N canvas 0 50 450 250 (subpatch) 0;
+#X array plot 441 float 4;
+#X coords 0 1 440 -1 200 140 1;
+#X restore 310 228 graph;
+#X obj 541 196 loadbang;
+#X text 55 403 Arguments: inMin inMax outMix outMax curve (all float)
+;
+#X text 54 21 lincurve~ - signal-rate port of SuperCollider's lincurve
+formula for linear-to-curved mapping - hjh, f 65;
+#X text 54 62 lincurve~ takes in a signal assumed to fall linearly
+within inMin .. inMax \, and maps it onto an output range outMin ..
+outMax with a variable curve. Curve = 0 is linear. Negative curve "pulls"
+the line to the left. Positive curve pulls it to the right. Out of
+range input is clipped., f 75;
+#X text 54 134 This is similar to cyclone/scale~ \, but the symmetry
+is better between negative and positive curve values., f 75;
+#X text 54 519 Outlet: Scaled and curved signal.;
+#X obj 86 305 lincurve~ 0 1 -1 1 0;
+#X obj 223 255 osc~ 0.25;
+#X obj 86 348 tabwrite~ plot;
+#X msg 541 221 \; pd dsp 1 \; lcscope 1;
+#X obj 58 185 tgl 15 0 empty lcscope empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 86 280 phasor~ 100;
+#X obj 58 230 t b b, f 15;
+#X msg 160 255 0;
+#X obj 223 280 *~ 8;
+#X obj 58 205 metro 50;
+#X text 54 430 Inlets: \; 1/ Input signal \; 2-3/ inMin inMax (or list
+of up to 4 floats \, to reset input or both ranges) \; 4-5/ outMin
+outMax (or list of 2 floats \, to reset output range) \; 6/ curve factor
+(float or signal)., f 77;
+#X connect 1 0 10 0;
+#X connect 7 0 9 0;
+#X connect 8 0 15 0;
+#X connect 11 0 16 0;
+#X connect 12 0 7 0;
+#X connect 13 0 9 0;
+#X connect 13 1 14 0;
+#X connect 14 0 12 1;
+#X connect 15 0 7 5;
+#X connect 16 0 13 0;

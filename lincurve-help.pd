@@ -1,0 +1,61 @@
+#N canvas 528 58 681 587 12;
+#X text 54 21 lincurve - port of SuperCollider's lincurve formula for
+linear-to-curved mapping - hjh;
+#X text 54 134 This is similar to cyclone/scale \, but the symmetry
+is better between negative and positive curve values., f 75;
+#X obj 121 196 hsl 128 15 -10 10 0 0 empty curve-in curve -2 -8 0 10
+#fcfcfc #000000 #000000 0 1;
+#X floatatom 118 216 5 0 0 0 - - - 0;
+#X obj 118 240 t b f;
+#N canvas 0 0 450 300 loop 0;
+#X obj 73 33 inlet;
+#X obj 73 58 t b b, f 8;
+#X msg 126 83 0;
+#X msg 73 83 128;
+#X obj 73 108 until;
+#X obj 73 133 f, f 8;
+#X obj 153 133 + 1;
+#X obj 73 158 t f f, f 8;
+#X obj 73 183 outlet;
+#X connect 0 0 1 0;
+#X connect 1 0 3 0;
+#X connect 1 1 2 0;
+#X connect 2 0 5 1;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 5 0 7 0;
+#X connect 6 0 5 1;
+#X connect 7 0 8 0;
+#X connect 7 1 6 0;
+#X restore 80 273 pd loop;
+#X obj 80 348 tabwrite plot, f 15;
+#X obj 80 298 t f f, f 15;
+#N canvas 0 50 450 250 (subpatch) 0;
+#X array plot 128 float 4;
+#X coords 0 1 127 -1 200 140 1;
+#X restore 297 228 graph;
+#X obj 80 323 lincurve 0 127 -1 1 0;
+#X obj 528 196 loadbang;
+#X msg 528 221 \; curve-in 0;
+#X text 54 62 lincurve takes in a number assumed to fall linearly within
+inMin .. inMax \, and maps it onto an output range outMin .. outMax
+with a variable curve. Curve = 0 is linear. Negative curve "pulls"
+the line to the left. Positive curve pulls it to the right. Out of
+range input is clipped., f 75;
+#X text 55 403 Arguments: inMin inMax outMix outMax curve (all float)
+;
+#X text 54 519 Outlet: Scaled and curved value.;
+#X text 54 430 Inlets: \; 1/ Input value (or list of up to 6 floats
+\, corresponding to the 6 inputs) \; 2-3/ inMin inMax (or list of up
+to 4 floats \, to reset input or both ranges) \; 4-5/ outMin outMax
+(or list of 2 floats \, to reset output range) \; 6/ curve factor.
+, f 77;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 4 1 9 5;
+#X connect 5 0 7 0;
+#X connect 7 0 9 0;
+#X connect 7 1 6 1;
+#X connect 9 0 6 0;
+#X connect 10 0 11 0;
