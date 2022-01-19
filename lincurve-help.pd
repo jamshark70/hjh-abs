@@ -42,7 +42,7 @@ inMin .. inMax \, and maps it onto an output range outMin .. outMax
 with a variable curve. Curve = 0 is linear. Negative curve "pulls"
 the line to the left. Positive curve pulls it to the right. Out of
 range input is clipped., f 75;
-#X text 55 403 Arguments: inMin inMax outMix outMax curve (all float)
+#X text 55 403 Arguments: inMin inMax outMin outMax curve (all float)
 ;
 #X text 54 519 Outlet: Scaled and curved value.;
 #X text 54 430 Inlets: \; 1/ Input value (or list of up to 6 floats
