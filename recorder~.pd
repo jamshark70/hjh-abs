@@ -33,7 +33,6 @@
 #X msg 101 62 pdrec -bytes 2 -format wav -stamp 1;
 #X obj 277 403 pack s \$0;
 #X obj 37 153 s \$0-basename;
-#X obj 303 489 print send symbol;
 #X msg 277 428 symbol \$2\$1;
 #X connect 0 0 1 0;
 #X connect 1 0 21 0;
@@ -61,9 +60,8 @@
 #X connect 15 0 20 0;
 #X connect 17 0 19 0;
 #X connect 19 0 1 0;
-#X connect 20 0 23 0;
-#X connect 23 0 16 1;
-#X connect 23 0 22 0;
+#X connect 20 0 22 0;
+#X connect 22 0 16 1;
 #X restore 421 120 pd processArgs;
 #N canvas 509 56 808 465 makeArgList 0;
 #X obj 74 33 inlet;

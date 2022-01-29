@@ -1,26 +1,28 @@
-#N canvas 553 29 655 508 12;
+#N canvas 553 29 655 515 12;
 #X obj 417 83 loadbang;
 #X msg 417 108 \; pd dsp 1;
 #X obj 82 83 osc~ 220;
 #X obj 334 83 osc~ 330;
 #X text 48 25 recorder~ - "one click" audio recording (stereo) - hjh
 ;
-#X text 49 274 Arguments: basename commandline-switches \; - basename:
-target filename (NO timestamp \, NO extension) \; - switches: -bytes
-(2 \, 3 or 4) \, -format (wav \, aiff \, caf) \, -stamp 1 = add timestamp
-\, 0 = no timestamp, f 69;
-#X text 49 359 Inlets: \; 1/ Left channel \, or argument list as defined
+#X text 49 382 Inlets: \; 1/ Left channel \, or argument list as defined
 above \; 2/ Right channel;
 #X obj 157 63 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000 0 1;
-#X text 50 430 The left inlet may also accept "rec 1" to start recording
+#X text 50 446 The left inlet may also accept "rec 1" to start recording
 \, and "rec 0" to stop., f 60;
 #X msg 157 83 rec \$1;
-#X obj 82 145 recorder~ test -bytes 2 -format wav -stamp 1;
+#X obj 82 152 recorder~ test -bytes 2 -format wav -stamp 1;
 #X msg 225 83 test -stamp 0;
+#X text 48 351 The "basename" is NOT optional in the argument list!
+Always begin with this., f 77;
+#X text 49 274 Arguments: basename commandline-switches \; - basename:
+target filename (NO timestamp \, NO extension) \; - switches: -bytes
+(2 \, 3 or 4) \, -format (wav \, aiff \, caf) \, -stamp 1 = add timestamp
+\, 0 = no timestamp. Switches are optional., f 69;
 #X connect 0 0 1 0;
-#X connect 2 0 10 0;
-#X connect 3 0 10 1;
-#X connect 7 0 9 0;
-#X connect 9 0 10 0;
-#X connect 11 0 10 0;
+#X connect 2 0 9 0;
+#X connect 3 0 9 1;
+#X connect 6 0 8 0;
+#X connect 8 0 9 0;
+#X connect 10 0 9 0;
