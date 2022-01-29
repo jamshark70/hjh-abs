@@ -1,0 +1,24 @@
+#N canvas 553 29 655 508 12;
+#X obj 417 83 loadbang;
+#X msg 417 108 \; pd dsp 1;
+#X obj 82 83 osc~ 220;
+#X text 49 274 Arguments: basename commandline-switches \; - basename:
+target filename (NO timestamp \, NO extension) \; - switches: -bytes
+(2 \, 3 or 4) \, -format (wav \, aiff \, caf) \, -stamp 1 = add timestamp
+\, 0 = no timestamp, f 69;
+#X obj 157 63 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X msg 157 83 rec \$1;
+#X msg 225 83 test -stamp 0;
+#X text 48 25 recorder-mono~ - "one click" audio recording (mono) -
+hjh;
+#X obj 82 145 recorder-mono~ test -bytes 2 -format wav -stamp 1;
+#X text 49 359 Inlet: \; 1/ Left channel \, or argument list as defined
+above.;
+#X text 50 413 The inlet may also accept "rec 1" to start recording
+\, and "rec 0" to stop.;
+#X connect 0 0 1 0;
+#X connect 2 0 8 0;
+#X connect 4 0 5 0;
+#X connect 5 0 8 0;
+#X connect 6 0 8 0;
