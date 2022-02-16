@@ -1,0 +1,21 @@
+#N canvas 437 332 571 328 12;
+#N canvas 413 161 450 115 \$0-catch 0;
+#X obj 16 48 outlet~;
+#X obj 10 10 catch~;
+#X connect 1 0 0 0;
+#X restore 45 189 pd \$0-catch;
+#X text 134 189 IMPORTANT: don't edit this subpatch manually \, otherwise
+you might mess up the ordering., f 47;
+#X obj 45 62 inlet;
+#X obj 44 219 outlet~;
+#X obj 291 94 iemguts/canvasdelete;
+#X text 134 94 For "delete" message:;
+#X obj 45 149 s pd-\$0-catch;
+#X msg 45 123 delete 1 \, obj 10 10 catch~ \$1 \, connect 1 0 0 0;
+#X obj 45 95 symbol \$1;
+#X obj 98 62 loadbang;
+#X connect 0 0 3 0;
+#X connect 2 0 8 0;
+#X connect 7 0 6 0;
+#X connect 8 0 7 0;
+#X connect 9 0 8 0;

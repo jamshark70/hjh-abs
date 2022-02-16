@@ -1,0 +1,68 @@
+#N canvas 527 29 684 636 12;
+#X text 42 24 mixersink~ - a lightweight submix for effect inserts
+- hjh;
+#X text 41 55 In a DAW \, effect inserts are integrated into the mixer
+channel. In Pd \, to do the same would require crossing connections
+from outlets at the bottom to inlets at the top. I wish to avoid this.
+So I recommend the following design for effect sends:, f 74;
+#X text 41 127 1 Source channels output dry signal to a 'main' or submix
+channel \; 2 mixersend~ objects tap the source signals and transfer
+them to an fx sink \; 3 A mixersink~ mixes the send signals and feeds
+into an effect \; 4 This may feed into an effect channel \, or be [throw~]n
+to the eventual target channel., f 73;
+#X obj 494 313 mixersink~ msinkhelp;
+#A saved msinkhelp 0 0;
+#N canvas 0 0 450 300 ringmod 0;
+#X obj 49 51 inlet~;
+#X obj 139 51 inlet~;
+#X obj 237 51 osc~ 100;
+#X obj 139 136 *~;
+#X obj 49 136 *~;
+#X obj 139 161 outlet~;
+#X obj 49 161 outlet~;
+#X connect 0 0 4 0;
+#X connect 1 0 3 0;
+#X connect 2 0 3 1;
+#X connect 2 0 4 1;
+#X connect 3 0 5 0;
+#X connect 4 0 6 0;
+#X restore 494 392 pd ringmod;
+#X f 17;
+#X obj 374 313 fader~ msinkmain;
+#A saved msinkmain 0 0 main 0;
+#X obj 509 435 throw~ msinkmain-auxR;
+#X obj 494 460 throw~ msinkmain-auxL;
+#X msg 494 251 name xyz;
+#X obj 572 231 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X msg 572 251 mute \$1;
+#X text 42 315 Arguments: \; 1 Input name.;
+#X text 42 482 Outputs: \; 1-2. Left and right channels (mixed from
+sources)., f 39;
+#X text 42 230 The sink defines a stereo pair of [catch~] objects \,
+based on the given name: here \, msinkhelp-auxL and msinkhelp-auxR.
+mixersend~ objects [throw~] to these. Then you may throw~ the effect's
+result to the target channel's auxL and auxR inputs., f 62;
+#N canvas 0 0 450 300 mixerdemo 0;
+#X obj 191 103 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X msg 191 123 dir;
+#X obj 191 148 pdcontrol;
+#X msg 191 173 \; pd open mixerdemo.pd \$1;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X coords 0 -1 1 1 110 21 1 100 100;
+#X restore 42 546 pd mixerdemo;
+#X text 155 546 for a functioning demo.;
+#X text 42 359 Inputs: \; 1 Messages: "name aSymbol" to change the
+name \, or "mute 0" / "mute 1". Optional: Audio signal (left). \; 2
+Optional: Audio signal (right). \; 3 Volume \, in dB (0 = unity gain).
+Not a signal input!, f 44;
+#X connect 3 0 4 0;
+#X connect 3 1 4 1;
+#X connect 4 0 7 0;
+#X connect 4 1 6 0;
+#X connect 8 0 3 0;
+#X connect 9 0 10 0;
+#X connect 10 0 3 0;

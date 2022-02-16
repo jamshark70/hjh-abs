@@ -1,0 +1,80 @@
+#N canvas 518 29 799 660 12;
+#X text 40 26 mixersend~ - tap the pre-/post-fader signal from a fader~
+and route for further processing - hjh, f 68;
+#X text 155 549 for a functioning demonstration.;
+#N canvas 0 0 450 300 mixerdemo 0;
+#X obj 191 103 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X msg 191 123 dir;
+#X obj 191 148 pdcontrol;
+#X msg 191 173 \; pd open mixerdemo.pd \$1;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X coords 0 -1 1 1 110 21 1 100 100;
+#X restore 42 549 pd mixerdemo;
+#X text 40 70 A "send" taps a source channel's signal \, applies a
+volume control \, and routes to a different channel. [mixersend~] specifies
+the source and target by name (and you can change the names at any
+time)., f 69;
+#X text 40 134 In a DAW \, normally the target channel hosts one or
+more effect inserts. [fader~] doesn't implement inserts internally.
+Instead \, you can use a [mixersink~]. This is a lighter-weight "fader
+\, " designed to be the head of an effect chain., f 69;
+#X text 40 211 One source [fader~] may have multiple [mixersend~]s
+\, and many [mixersend~]s can mix down into a single [mixersink~] or
+[fader~]., f 69;
+#X text 40 261 Arguments: \; 1 Source [fader~] name. (Must be a [fader~].)
+\; 2 Target [mixersink~] or [fader~] name.;
+#X obj 410 297 fader~ msendSrc;
+#A saved msendSrc 0 0 main 0;
+#X obj 531 297 mixersend~ msendSrc msendTarg;
+#A saved msendSrc 0 0 msendTarg 0;
+#X obj 531 391 mixersink~ msendTarg;
+#A saved msendTarg 0 0;
+#X text 40 457 Outputs: \; 1-2. Left and right channels (mixed from
+sources)., f 39;
+#X obj 616 185 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X msg 616 205 mute \$1;
+#X obj 531 475 mixersink~ msendT2;
+#A saved msendT2 0 0;
+#X obj 616 238 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X msg 616 258 pre \$1;
+#X msg 566 70 name msendSrc;
+#X msg 592 112 target msendT2;
+#X msg 613 142 target msendTarg;
+#X text 40 321 Inputs: \; 1 Messages: "name aSymbol" or "target aSymbol"
+to change the source/target \, "pre 0" / "pre 1" \, or "mute 0" / "mute
+1". Optional: Audio signal (left). \; 2 Optional: Audio signal (right).
+\; 3 Volume \, in dB (0 = unity gain). Not a signal input!, f 44;
+#X text 637 235 pre-/post-fader;
+#N canvas 0 0 450 300 mixersink 0;
+#X obj 191 103 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X msg 191 123 dir;
+#X obj 191 148 pdcontrol;
+#X msg 191 173 \; pd open mixersink~-help.pd \$1;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X coords 0 -1 1 1 110 21 1 100 100;
+#X restore 42 579 pd mixersink;
+#X text 155 579 for details on mixersink.;
+#N canvas 0 0 483 240 spurious-error-messages 0;
+#X text 25 22 As of this writing \, [receive~] (used here) posts a
+visible warning message if it doesn't have exactly one [send~]. While
+reloading a patch \, there may be a brief moment during initialization
+where this condition is not met. \; \; You may see errors posted at
+this time (maybe a lot of them). \; \; As long as the patch works \,
+then... ignore them. \; \; This might change in a future Pd version
+\, or maybe not.;
+#X restore 449 579 pd spurious-error-messages;
+#X connect 11 0 12 0;
+#X connect 12 0 8 0;
+#X connect 14 0 15 0;
+#X connect 15 0 8 0;
+#X connect 16 0 8 0;
+#X connect 17 0 8 0;
+#X connect 18 0 8 0;

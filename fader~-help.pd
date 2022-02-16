@@ -1,0 +1,210 @@
+#N canvas 379 29 963 636 12;
+#X declare -path hjh-abs;
+#N canvas 0 0 450 300 mixerdemo 0;
+#X obj 191 103 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X msg 191 123 dir;
+#X obj 191 148 pdcontrol;
+#X msg 191 173 \; pd open mixerdemo.pd \$1;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X coords 0 -1 1 1 110 21 1 100 100;
+#X restore 42 263 pd mixerdemo;
+#X text 40 515 Outputs: \; 1-2. Left and right channels (mixed from
+sources)., f 52;
+#X obj 610 160 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X msg 610 180 mute \$1;
+#N canvas 0 0 450 300 mixersink 0;
+#X obj 191 103 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X msg 191 123 dir;
+#X obj 191 148 pdcontrol;
+#X msg 191 173 \; pd open mixersink~-help.pd \$1;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X coords 0 -1 1 1 110 21 1 100 100;
+#X restore 227 293 pd mixersink;
+#X text 40 293 See also;
+#N canvas 0 0 450 300 mixersend 0;
+#X obj 191 103 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X msg 191 123 dir;
+#X obj 191 148 pdcontrol;
+#X msg 191 173 \; pd open mixersend~-help.pd \$1;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X coords 0 -1 1 1 110 21 1 100 100;
+#X restore 109 293 pd mixersend;
+#X text 40 26 fader~ - core of a modular mixing framework for Pd -
+hjh, f 68;
+#X obj 568 309 fader~ helpSrcA;
+#A saved helpSrcA -18.5355 0 helpMain 0;
+#N canvas 0 0 522 300 source 0;
+#X obj 95 82 lfo-norm-hjh~ line;
+#X obj 95 32 loadbang;
+#X msg 95 57 4;
+#X obj 56 121 pow~;
+#X obj 40 82 sig~ 2;
+#X obj 56 146 *~ 400;
+#X obj 56 171 osc~;
+#X obj 56 196 outlet~;
+#X obj 279 196 outlet~;
+#X obj 279 107 delread4~ \$0faderHelp;
+#X obj 279 82 sig~ 110;
+#X obj 19 234 delwrite~ \$0faderHelp 150;
+#X connect 0 0 3 1;
+#X connect 1 0 2 0;
+#X connect 2 0 0 0;
+#X connect 3 0 5 0;
+#X connect 4 0 3 0;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 6 0 11 0;
+#X connect 9 0 8 0;
+#X connect 10 0 9 0;
+#X restore 605 272 pd source;
+#X obj 398 569 declare -path hjh-abs;
+#X msg 568 23 name helpSrcB;
+#X msg 591 102 target doesntexist;
+#X msg 601 127 target helpMain;
+#X msg 611 224 ctr;
+#X text 645 224 reset pan to 0;
+#N canvas 0 0 450 300 srcB 0;
+#N canvas 0 0 450 300 lfo1 0;
+#X obj 158 35 osc~ 0.3;
+#X obj 84 35 sig~ 3;
+#X obj 109 70 pow~;
+#X obj 109 95 osc~;
+#X obj 109 183 lfo-norm-hjh~ line;
+#X obj 84 208 pow~;
+#X obj 84 233 *~ 400;
+#X obj 84 258 outlet~;
+#X obj 109 125 *~ 10;
+#X obj 109 150 +~ 11;
+#X connect 0 0 2 1;
+#X connect 1 0 2 0;
+#X connect 1 0 5 0;
+#X connect 2 0 3 0;
+#X connect 3 0 8 0;
+#X connect 4 0 5 1;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 8 0 9 0;
+#X connect 9 0 4 0;
+#X restore 62 85 pd lfo1;
+#X obj 125 40 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 125 60 metro 100;
+#X obj 62 114 snapshot~;
+#X obj 62 139 osc~;
+#X msg 148 114 1 10 \, 0 60 10;
+#X obj 148 139 vline~;
+#X obj 103 170 *~;
+#X obj 125 85 t b b b;
+#X obj 209 60 random 100;
+#X obj 209 85 + 75;
+#X obj 189 35 loadbang;
+#X msg 153 35 1;
+#X obj 103 195 outlet~;
+#X connect 0 0 3 0;
+#X connect 1 0 2 0;
+#X connect 2 0 8 0;
+#X connect 3 0 4 0;
+#X connect 4 0 7 0;
+#X connect 5 0 6 0;
+#X connect 6 0 7 1;
+#X connect 7 0 13 0;
+#X connect 8 0 3 0;
+#X connect 8 1 5 0;
+#X connect 8 2 9 0;
+#X connect 9 0 10 0;
+#X connect 10 0 2 1;
+#X connect 11 0 12 0;
+#X connect 12 0 1 0;
+#X restore 742 23 pd srcB;
+#X obj 762 48 throw~ helpSrcB-auxR;
+#X obj 742 73 throw~ helpSrcB-auxL;
+#X msg 578 48 name helpSrcA;
+#X text 807 458 <-- unmute to hear, f 11;
+#X obj 706 309 fader~ helpMain;
+#A saved helpMain 7.62939e-06 0 helpMain 1;
+#X obj 706 573 dac~, f 13;
+#X text 808 572 <-- attach dac~ to main channel, f 15;
+#X text 808 532 <-- .null. for main channel, f 15;
+#X text 740 93 faders can also receive signals from throw~. This signal
+will be heard through a channel named helpSrcB. Changing helpSrcA to
+helpSrcB will pick up this signal., f 27;
+#X text 40 56 [fader~] mimics a mixer channel in a DAW. It accepts
+stereo input from signal inlets (and publishes named aux input ports)
+\, applies panning and volume \, outputs the result through signal
+outlets and also publishes pre-/post-fader send ports., f 69;
+#X text 40 135 Named I/O means that you can build a mixing board without
+visible signal connections. Every fader~ receives input on a pair of
+[catch~] objects: e.g. \, 'helpMain' here has [catch~ helpMain-auxL]
+and [catch~ helpMain-auxR]. Setting the output name of helpSrcA to
+'helpMain' [throw~]s the signal to these [catch~] objects. A similar
+mechanism with [send~] and [receive~] supports effect sends (see pd
+mixersend below)., f 70;
+#N canvas 0 0 482 195 null 0;
+#X text 18 33 The default output name is 'main'.;
+#X text 17 63 If the input name is also 'main' \, then this could create
+a feedback loop. fader~ therefore disables the [throw~] outputs and
+lists a '.null.' output. You may still attach a dac~ for main output.
+In principle you would have one such main-channel for an entire patch.
+;
+#X restore 822 510 pd null;
+#N canvas 365 150 482 231 notes-on-names 0;
+#X text 17 26 fader~ uses catch~ objects for aux inputs. These are
+named according to the fader's input name.;
+#X text 17 71 There may be only one [catch~] per unique name.;
+#X text 17 105 Therefore you should take care not to have two faders
+with the same input name.;
+#X text 17 154 Multiple faders with the same output name will be mixed
+at the target channel's input.;
+#X restore 776 224 pd notes-on-names;
+#X text 40 336 Arguments: \; 1 Input name. Must be unique across all
+existing faders \; 2 Target [fader~] or [mixersink~] name.;
+#X text 40 396 Inputs: \; 1 Messages: "name aSymbol" or "target aSymbol"
+to change the source/target \, "mute 0" / "mute 1" \, or "ctr". Optional:
+Audio signal (left). \; 2 Optional: Audio signal (right). \; 3 Volume
+\, in dB (0 = unity gain). Not a signal input! \; 4 Pan \, ranging
+-1 to +1. Not a signal input!, f 69;
+#N canvas 266 194 514 325 latency 0;
+#X text 25 24 [throw~] / [catch~] pairs may incur one control block's
+worth of latency. These may accumulate if a signal is chained through
+multiple submix buses.;
+#X obj 572 28 r faderHelpLatency;
+#X obj 572 53 pdcontrol;
+#X text 25 86 See the following forum thread for more about latency.
+;
+#X msg 27 133 \; faderHelpLatency browse https://forum.pdpatchrepo.info/topic/13512/s-r-throw-catch-latency-and-object-creation-order
+;
+#X obj 27 113 bng 15 250 50 0 empty empty <--clickme 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X text 25 216 I'm not going to try to handle this within these abstractions.
+If you need zero-latency mixing \, better to do it a different way
+(or use SuperCollider \, where you don't have to use patch cables to
+control evaluation order).;
+#X connect 1 0 2 0;
+#X connect 5 0 4 0;
+#X restore 776 252 pd latency;
+#X text 155 263 for a functioning demonstration (with fx sends).;
+#X text 466 320 input name -->;
+#X text 459 532 output name -->;
+#X connect 2 0 3 0;
+#X connect 3 0 8 0;
+#X connect 9 0 8 0;
+#X connect 9 1 8 1;
+#X connect 11 0 8 0;
+#X connect 12 0 8 0;
+#X connect 13 0 8 0;
+#X connect 14 0 8 0;
+#X connect 16 0 17 0;
+#X connect 16 0 18 0;
+#X connect 19 0 8 0;
+#X connect 21 0 22 0;
+#X connect 21 1 22 1;
