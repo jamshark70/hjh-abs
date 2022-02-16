@@ -1,5 +1,5 @@
 #N canvas 846 354 450 369 12;
-#X symbolatom 218 74 10 0 0 0 - - -;
+#X symbolatom 218 74 10 0 0 0 - - - 0;
 #X msg 117 73 foo;
 #X msg 150 73 bar;
 #X msg 184 73 baz;
@@ -8,14 +8,25 @@
 #X obj 58 135 noise~;
 #X obj 59 209 r~ foo;
 #X obj 59 233 env~;
-#X floatatom 59 257 5 0 0 0 - - -;
+#X floatatom 59 257 5 0 0 0 - - - 0;
 #X obj 120 231 env~;
-#X floatatom 120 255 5 0 0 0 - - -;
+#X floatatom 120 255 5 0 0 0 - - - 0;
 #X obj 120 207 r~ bar;
 #X obj 179 230 env~;
-#X floatatom 179 254 5 0 0 0 - - -;
+#X floatatom 179 254 5 0 0 0 - - - 0;
 #X obj 179 206 r~ baz;
 #X msg 117 133 set \$1;
+#X text 213 132 by Christof Ressi \, Feb 2022;
+#X obj 284 161 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#N canvas 449 70 450 300 source-page 0;
+#X obj 37 37 inlet;
+#X obj 37 117 pdcontrol;
+#X msg 37 62 browse https://github.com/pure-data/pure-data/issues/1567#issuecomment-1026990681
+;
+#X connect 0 0 2 0;
+#X connect 2 0 1 0;
+#X restore 284 181 pd source-page;
 #X connect 0 0 16 0;
 #X connect 1 0 5 0;
 #X connect 2 0 5 0;
@@ -29,3 +40,4 @@
 #X connect 13 0 14 0;
 #X connect 15 0 13 0;
 #X connect 16 0 4 0;
+#X connect 18 0 19 0;
