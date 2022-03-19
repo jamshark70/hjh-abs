@@ -1,0 +1,53 @@
+#N canvas 515 42 567 613 12;
+#X text 38 15 formlet~ - an attack/decay resonator based on SuperCollider's
+Formlet UGen - hjh;
+#X text 39 60 This resonator expresses attack and decay times in milliseconds.
+Effectively \, the impulse response is a sinusoidal grain.;
+#X obj 44 177 hsl 128 15 1 200 1 0 empty empty impulse_frequency -2
+-8 0 10 #fcfcfc #000000 #000000 0 1;
+#X floatatom 41 197 5 0 0 0 - - - 0;
+#N canvas 0 0 450 300 impulses 0;
+#X obj 67 76 phasor~ 1;
+#X obj 67 101 rzero~ 1;
+#X obj 67 126 clip~ -1 0;
+#X obj 67 51 inlet;
+#X obj 67 176 outlet~;
+#X obj 67 151 *~ -9;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 5 0;
+#X connect 3 0 0 0;
+#X connect 5 0 4 0;
+#X restore 41 221 pd impulses;
+#X obj 40 257 formlet~ 440 200 1000, f 56;
+#X obj 40 300 fader~ res;
+#A saved res -6.0719 0 flhelp 0;
+#X obj 40 557 dac~, f 13;
+#X obj 191 177 hsl 128 15 100 2000 1 0 empty empty resonant_frequency
+-2 -8 0 10 #fcfcfc #000000 #000000 0 1;
+#X floatatom 188 197 5 0 0 0 - - - 0;
+#X obj 336 177 hsl 128 15 1 1000 1 0 empty empty attack_time -2 -8
+0 10 #fcfcfc #000000 #000000 0 1;
+#X floatatom 333 197 5 0 0 0 - - - 0;
+#X obj 393 213 hsl 128 15 1 5000 1 0 empty empty decay_time -2 -8 0
+10 #fcfcfc #000000 #000000 0 1;
+#X floatatom 390 233 5 0 0 0 - - - 0;
+#X text 177 322 Inlets: \; 1 Input signal \; 2 Resonator frequency
+(signal or float) \; 3 Attack time (ms \, signal or float) \; 4 Decay
+time (ms \, signal or float) \; \; Outlet: Filtered signal. \; \; Arguments:
+\; 1 Resonator frequency \; 2 Attack time (ms) \; 3 Decay time (ms).
+\; \; Arguments are ignored if signals are connected.;
+#X text 38 118 Requires ELSE library (available in deken).;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 5 0 6 0;
+#X connect 5 0 6 1;
+#X connect 6 0 7 0;
+#X connect 6 1 7 1;
+#X connect 8 0 9 0;
+#X connect 9 0 5 1;
+#X connect 10 0 11 0;
+#X connect 11 0 5 2;
+#X connect 12 0 13 0;
+#X connect 13 0 5 3;
