@@ -1,0 +1,284 @@
+#N canvas 446 29 663 656 12;
+#X text 37 21 tick-scheduler: Schedules lists for later output \, based
+on incoming clock ticks - hjh;
+#X text 37 69 A scheduler stores items in time order \, and outputs
+them at the given time. This scheduler knows what time it is when you
+send it timeslice messages (left inlet) in the format "time_now slice_duration".
+It's suitable for use with [abl_link~] \, MIDI clock messages \, or
+[metro]. Tempo messages are fully supported (see [metro] help).;
+#N canvas 466 29 728 652 master_transport_example 0;
+#X obj 66 282 tick-scheduler;
+#X obj 98 141 value lasttick;
+#X obj 161 241 r sched;
+#X obj 20 10 loadbang;
+#X obj 517 159 * 0.25;
+#X obj 517 184 + 0.999999;
+#X obj 517 209 int;
+#X obj 517 234 * 4;
+#X msg 517 259 \; sched \$1 note;
+#X obj 327 117 * 4;
+#X obj 327 142 % 4;
+#X floatatom 327 167 5 0 0 0 - - - 0;
+#X obj 284 142 % 4;
+#X floatatom 284 167 5 0 0 0 - - - 0;
+#X obj 240 142 div 4;
+#X floatatom 240 167 5 0 0 0 - - - 0;
+#X obj 261 85 t f f f f;
+#X obj 143 461 +, f 6;
+#X obj 66 364 route note;
+#N canvas 0 0 450 481 note 0;
+#X obj 37 37 inlet;
+#X obj 279 87 random 2;
+#X obj 279 112 + 1;
+#X obj 280 137 * 0.25;
+#X obj 37 187 list store 36 48 42 44 43 39 53 51 65;
+#X obj 37 112 f;
+#X obj 37 137 t f f;
+#X obj 91 112 + 1;
+#X obj 91 137 % 9;
+#X msg 37 162 get \$1 1;
+#X obj 37 62 t b b, f 35;
+#X obj 280 162 outlet;
+#X obj 37 212 t f b;
+#X msg 168 212 1 5 \, 0 100 5;
+#X obj 168 237 vline~;
+#X obj 37 237 - 12;
+#X obj 37 262 mtof;
+#X obj 37 291 *~;
+#X obj 83 262 +~ 1;
+#X obj 37 391 *~, f 16;
+#X obj 37 416 outlet~;
+#X obj 37 316 phasor~;
+#X obj 37 341 lop~ 1000;
+#X obj 37 366 lop~ 1000;
+#X connect 0 0 10 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 3 0 11 0;
+#X connect 4 0 12 0;
+#X connect 5 0 6 0;
+#X connect 6 0 9 0;
+#X connect 6 1 7 0;
+#X connect 7 0 8 0;
+#X connect 8 0 5 1;
+#X connect 9 0 4 0;
+#X connect 10 0 5 0;
+#X connect 10 1 1 0;
+#X connect 12 0 15 0;
+#X connect 12 1 13 0;
+#X connect 13 0 14 0;
+#X connect 14 0 18 0;
+#X connect 14 0 19 1;
+#X connect 15 0 16 0;
+#X connect 16 0 17 1;
+#X connect 17 0 21 0;
+#X connect 18 0 17 0;
+#X connect 19 0 20 0;
+#X connect 21 0 22 0;
+#X connect 22 0 23 0;
+#X connect 23 0 19 0;
+#X restore 66 389 pd note;
+#X msg 143 486 \; sched \$1 note;
+#X obj 485 64 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 485 84 t f f;
+#X obj 517 109 select 1;
+#X obj 123 427 spigot;
+#X obj 66 307 list-splitflip 1, f 27;
+#X obj 517 134 getvalue lasttick;
+#X obj 66 71 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000 #000000
+0 1;
+#X msg 20 35 tempo 124 permin;
+#N canvas 0 0 450 300 clock 0;
+#X obj 57 24 inlet;
+#X obj 222 74 t f f;
+#X obj 307 124 select 1;
+#X msg 307 149 0;
+#X obj 57 49 route tempo, f 24;
+#X obj 57 74 list prepend tempo;
+#X obj 57 99 list trim;
+#X obj 222 149 metro 0.25;
+#X obj 222 174 f;
+#X obj 222 199 t f f;
+#X obj 280 174 + 0.25;
+#X obj 222 224 outlet;
+#X connect 0 0 4 0;
+#X connect 1 0 7 0;
+#X connect 1 1 2 0;
+#X connect 2 0 3 0;
+#X connect 3 0 8 1;
+#X connect 4 0 5 0;
+#X connect 4 1 1 0;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 7 0 8 0;
+#X connect 8 0 9 0;
+#X connect 9 0 11 0;
+#X connect 9 1 10 0;
+#X connect 10 0 8 1;
+#X restore 66 91 pd clock;
+#X obj 66 116 t f f;
+#X msg 66 194 \$1 0.25;
+#X obj 146 571 hsl 128 15 0 1 0 0 empty empty volume -2 -8 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 143 591 5 0 0 0 - - - 0;
+#X obj 66 461 *~;
+#X obj 66 486 dac~;
+#X text 129 194 timeslice message!;
+#X text 191 436 current time + time to next = new time, f 15;
+#X text 318 344 The series of ticks is time-continuous \; - 0 0.25
+\; - 0.25 0.25 \; - 0.5 0.25 \; - 0.75 0.25 etc. \; \; So the scheduler's
+timing is consistent! You could even tick less often (once per beat)
+and the scheduler will dole out the messages at the right time. With
+[abl_link~] \, use the "step" output and make each time slice 1 beat
+(rather than 0.25). \; \; You can reschedule while the scheduler is
+running (below the [spigot]). \; \; The upper right rounds up to the
+barline (quantized sequence onset)., f 53;
+#X connect 0 0 25 0;
+#X connect 2 0 0 1;
+#X connect 3 0 28 0;
+#X connect 4 0 5 0;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 7 0 8 0;
+#X connect 9 0 10 0;
+#X connect 10 0 11 0;
+#X connect 12 0 13 0;
+#X connect 14 0 15 0;
+#X connect 16 0 14 0;
+#X connect 16 1 12 0;
+#X connect 16 2 9 0;
+#X connect 17 0 20 0;
+#X connect 18 0 19 0;
+#X connect 19 0 34 0;
+#X connect 19 1 24 0;
+#X connect 21 0 22 0;
+#X connect 22 0 24 1;
+#X connect 22 1 23 0;
+#X connect 23 0 26 0;
+#X connect 24 0 17 0;
+#X connect 25 0 18 0;
+#X connect 25 1 17 1;
+#X connect 26 0 4 0;
+#X connect 27 0 29 0;
+#X connect 28 0 0 0;
+#X connect 28 0 29 0;
+#X connect 29 0 30 0;
+#X connect 30 0 31 0;
+#X connect 30 1 16 0;
+#X connect 30 1 1 0;
+#X connect 31 0 0 0;
+#X connect 32 0 33 0;
+#X connect 33 0 34 1;
+#X connect 34 0 35 0;
+#X connect 34 0 35 1;
+#X restore 403 339 pd master_transport_example;
+#X text 38 445 Arguments: None.;
+#X text 37 476 Inlets: \; 1 Timeslice messages (two numbers "A B" define
+a timeslice A <= time < B). Also "clear" and "tempo..." messages (see
+the transport example). \; 2 Messages to schedule. The list should
+begin with a float for the scheduled time.;
+#X text 37 582 Outlet: The scheduled list (with time prefix).;
+#N canvas 456 113 600 489 post_tick_timing 0;
+#X obj 238 33 cnv 15 332 74 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X msg 247 43 800 msg1;
+#X msg 262 76 1200 msg2;
+#X text 318 43 1 Put some messages into the queue;
+#X obj 152 159 tick-scheduler;
+#X obj 44 119 t a b;
+#X obj 152 184 t b a;
+#X obj 76 225 timer;
+#X obj 76 250 print time_after_tick;
+#X obj 184 209 print output_message;
+#X text 355 76 either order!;
+#X obj 34 34 cnv 15 160 36 empty empty empty 20 12 0 14 #ffe3c6 #404040
+0;
+#X obj 53 71 cnv 15 180 36 empty empty empty 20 12 0 14 #c6feff #404040
+0;
+#X msg 44 43 0 1000;
+#X text 102 36 2 timeslice 0-999 ms, f 11;
+#X msg 61 80 1000 1000;
+#X text 135 73 3 timeslice 1000-1999 ms, f 12;
+#X msg 152 125 clear;
+#X text 48 304 tick-scheduler preserves timing of events scheduled
+between ticks -- that is \, you don't need to quantize everything to
+the tick (and you don't need to tick extremely rapidly).;
+#X text 48 372 1- Click the two source messages at right. \; 2- Click
+"0 1000" -- "800 msg1" falls into this time slice \, and will be output
+after 800 ms. \; 3- Click "1000 1000" -- "1200 msg2" falls into this
+time slice \, and will be output after 200 ms (1200 - 1000 = 200).
+;
+#X connect 1 0 4 1;
+#X connect 2 0 4 1;
+#X connect 4 0 6 0;
+#X connect 5 0 4 0;
+#X connect 5 1 7 0;
+#X connect 6 0 7 1;
+#X connect 6 1 9 0;
+#X connect 7 0 8 0;
+#X connect 13 0 5 0;
+#X connect 15 0 5 0;
+#X connect 17 0 4 0;
+#X restore 432 364 pd post_tick_timing;
+#X obj 57 182 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 57 202 t f f;
+#X obj 137 227 select 1;
+#X msg 137 252 0;
+#X obj 57 227 metro 1000;
+#X obj 57 277 f;
+#X obj 57 302 t f f;
+#X msg 57 327 \$1 1000;
+#X obj 57 352 tick-scheduler;
+#X obj 57 377 print;
+#X obj 225 252 timer;
+#X obj 257 204 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#N canvas 0 0 450 300 roundUpTo2Sec 0;
+#X obj 37 37 inlet;
+#X obj 37 62 / 2000;
+#X obj 37 87 + 0.999999;
+#X obj 37 112 int;
+#X obj 37 137 * 2000;
+#X obj 37 162 outlet;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X restore 225 277 pd roundUpTo2Sec;
+#X msg 225 302 \$1 twoSecQuant;
+#X obj 225 352 print sched;
+#X obj 119 278 + 1000;
+#X obj 39 402 print tick;
+#X text 276 201 <-- click to schedule at the next 2000ms mark;
+#X obj 377 403 cnv 15 254 42 empty empty empty 20 12 0 14 #ffc7c6 #404040
+0;
+#X text 386 407 DEPENDENCY: pdcontainer external \; use deken to install
+it;
+#X obj 355 277 + 2000;
+#X msg 355 302 \$1 twoSecLater;
+#X connect 7 0 8 0;
+#X connect 8 0 11 0;
+#X connect 8 1 9 0;
+#X connect 9 0 10 0;
+#X connect 9 0 17 0;
+#X connect 10 0 12 1;
+#X connect 11 0 12 0;
+#X connect 12 0 13 0;
+#X connect 13 0 14 0;
+#X connect 13 1 22 0;
+#X connect 14 0 23 0;
+#X connect 14 0 15 0;
+#X connect 15 0 16 0;
+#X connect 17 0 19 0;
+#X connect 17 0 27 0;
+#X connect 18 0 17 1;
+#X connect 19 0 20 0;
+#X connect 20 0 21 0;
+#X connect 20 0 15 1;
+#X connect 22 0 12 1;
+#X connect 27 0 28 0;
+#X connect 28 0 21 0;
+#X connect 28 0 15 1;

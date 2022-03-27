@@ -1,0 +1,26 @@
+#N canvas 507 29 598 547 12;
+#X text 49 38 list-splitflip: split a list and output the remainder
+from the left outlet - hjh;
+#X text 49 90 Intended as a companion \, utility object for [tick-scheduler].
+The scheduler outputs lists in the format "time value value value..."
+Often you want the time to be output on the right rather than the left.
+[list-splitflip] takes [list split]'s output and reverses the left
+and middle outlets. (The middle outlet comes first.);
+#X msg 198 216 1000 250 bassnote 36;
+#X obj 198 241 list-splitflip 2, f 19;
+#X obj 263 266 print M;
+#X obj 198 266 print L;
+#X msg 158 216 500;
+#X obj 328 266 print error;
+#X text 49 308 Argument: Number of leading items to output to the middle
+outlet (default = 1);
+#X text 48 356 Inlets: \; 1 The list to split. \; 2 The number of items
+to send to the middle outlet.;
+#X text 48 421 Outlets: \; 1 The rightmost \, remaining list elements.
+\; 2 The first /n/ list elements. \; 3 The list \, if its size is <
+/n/.;
+#X connect 2 0 3 0;
+#X connect 3 0 5 0;
+#X connect 3 1 4 0;
+#X connect 3 2 7 0;
+#X connect 6 0 3 0;
