@@ -231,7 +231,7 @@ set \$1-postR \; \$2-preL set \$1-preL \; \$2-preR set \$1-preR \;
 #X msg 212 99 \; \$1-pan 0;
 #X obj 513 534 r \$0-outL;
 #X obj 610 534 r \$0-outR;
-#X obj 128 208 tgl 15 0 empty \$0-muteR mute -4 22 0 10 #fce0e0 #000000
+#X obj 128 208 tgl 15 0 empty \$0-muteR mute -4 22 0 10 #ffffff #000000
 #000000 0 1;
 #X obj 77 117 vu 15 120 \$0-meterR empty -1 -8 0 10 #404040 #000000
 0 0;
