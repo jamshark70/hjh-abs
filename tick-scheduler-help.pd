@@ -175,7 +175,7 @@ barline (quantized sequence onset)., f 53;
 #X restore 403 339 pd master_transport_example;
 #X text 38 445 Arguments: None.;
 #X text 37 476 Inlets: \; 1 Timeslice messages (two numbers "A B" define
-a timeslice A <= time < B). Also "clear" and "tempo..." messages (see
+a timeslice A <= time < (A+B)). Also "clear" and "tempo..." messages (see
 the transport example). \; 2 Messages to schedule. The list should
 begin with a float for the scheduled time.;
 #X text 37 582 Outlet: The scheduled list (with time prefix).;
