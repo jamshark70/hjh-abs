@@ -1,5 +1,5 @@
 #N canvas 535 64 681 599 12;
-#X declare -path pdcontainer;
+#X declare -path pdcontainer -lib PDContainer;
 #X obj 514 112 inlet;
 #N canvas 0 0 450 300 push 0;
 #X obj 74 36 inlet;
@@ -123,7 +123,7 @@ and re-tick, f 21;
 #X connect 7 0 10 0;
 #X restore 317 137 pd handle-tick;
 #X obj 181 238 r \$0-prio;
-#X obj 49 29 declare -path pdcontainer;
+#X obj 49 29 declare -path pdcontainer -lib PDContainer;
 #X connect 0 0 1 0;
 #X connect 1 0 18 0;
 #X connect 1 1 24 1;
