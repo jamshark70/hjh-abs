@@ -1,0 +1,35 @@
+#N canvas 520 77 634 544 12;
+#X text 42 28 faderthrow~ - simplify throwing a signal to a fader~
+\, mixersend~ or mixersink~ object - hjh;
+#X text 42 76 It is slightly inconvenient to make a pair of throw~
+objects for stereo signals send to fader~ or siblings. faderthrow~
+makes an auxL and auxR pair for the given symbol (e.g. [faderthrow~
+lead] assigns throw~ objects to lead-auxL and lead-auxR). An additional
+convenience is that a mono signal to the left inlet (unconnected right
+inlet) will automatically duplicate the left channel to the right.
+, f 75;
+#X obj 365 188 fader~ fthelp;
+#A saved fthelp -26.3517 0 main 0;
+#X obj 477 188 fader~ fth_other;
+#A saved fth_other -19.326 0 main 0;
+#X obj 452 477 dac~;
+#X msg 229 263 \; pd dsp 1;
+#X obj 65 279 faderthrow~ fthelp;
+#X obj 65 213 lop~ 1000;
+#X obj 65 238 lop~ 1000;
+#X msg 188 213 symbol fth_other;
+#X msg 209 238 symbol fthelp;
+#X text 42 328 Argument: A symbol \, naming the fader~ target;
+#X text 42 361 Inlets: \; 1- Left signal input \; 2- Right signal input
+(optional) \; 3- Symbol \, to change the target.;
+#X text 42 439 Outlets: None.;
+#X obj 65 188 osc~ 440;
+#X connect 2 0 4 0;
+#X connect 2 1 4 1;
+#X connect 3 0 4 0;
+#X connect 3 1 4 1;
+#X connect 7 0 8 0;
+#X connect 8 0 6 0;
+#X connect 9 0 6 2;
+#X connect 10 0 6 2;
+#X connect 14 0 7 0;
