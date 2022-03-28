@@ -15,8 +15,6 @@ inlet) will automatically duplicate the left channel to the right.
 #X obj 452 477 dac~;
 #X msg 229 263 \; pd dsp 1;
 #X obj 65 279 faderthrow~ fthelp;
-#X obj 65 213 lop~ 1000;
-#X obj 65 238 lop~ 1000;
 #X msg 188 213 symbol fth_other;
 #X msg 209 238 symbol fthelp;
 #X text 42 328 Argument: A symbol \, naming the fader~ target;
@@ -28,8 +26,6 @@ inlet) will automatically duplicate the left channel to the right.
 #X connect 2 1 4 1;
 #X connect 3 0 4 0;
 #X connect 3 1 4 1;
-#X connect 7 0 8 0;
-#X connect 8 0 6 0;
-#X connect 9 0 6 2;
-#X connect 10 0 6 2;
-#X connect 14 0 7 0;
+#X connect 7 0 6 2;
+#X connect 8 0 6 2;
+#X connect 12 0 6 0;
