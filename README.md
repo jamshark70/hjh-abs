@@ -2,7 +2,6 @@
 
 A small collection of only loosely maintained Pure Data utility abstractions.
 
-- analog-hjh~.pd: Oscillator plus filter (depends on mmb abstractions).
 - dataseq-hjh.pd: One-row-at-a-time sequencer.
 - eg-hjh~.pd: ADSR.
 - fader~ suite: Modular mixing abstractions with wireless connections and support for send aux effects.
