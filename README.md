@@ -28,6 +28,8 @@ A small collection of only loosely maintained Pure Data utility abstractions.
   - [recorder~] depends on zexy.
   - [tick-scheduler] depends on pdcontainer.
   - [fader~] and related objects depend on iemguts.
+  - [formlet~] depends on the ELSE library.
+  - Many help patches use pddp/ezoutput~.
 - Other dependencies:
   - [vstplug-hjh~] depends on Christof Ressi's excellent vstplugin~ external, available at https://git.iem.at/pd/vstplugin .
 
