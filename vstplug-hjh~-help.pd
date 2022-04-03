@@ -1,20 +1,35 @@
 #N canvas 592 105 566 630 12;
 #X text 37 15 vstplugin~ wrapper by hjh;
-#X obj 136 110 vstplug-hjh~ plugin_name 1;
-#X text 37 40 Automatically opens a VST plug-in with the given name.
-;
-#X text 37 250 Inlets:;
-#X text 37 272 1: Messages \, forwarded to the [vstplugin~] instance.
+#X obj 40 171 vstplug-hjh~ plugin_name 1;
+#X text 37 281 Inlets:;
+#X text 37 303 1: Messages \, forwarded to the [vstplugin~] instance.
 ('panic' is a special message that sends all notes off \, to channel
 1.);
-#X text 37 327 2-3: Signal inlets.;
-#X text 37 351 4: A symbol \, to load a different plug-in.;
-#X text 37 389 Outlets:;
-#X text 37 413 1-2: Signal outlets.;
+#X text 37 349 2-3: Signal inlets.;
+#X text 37 366 4: A symbol \, to load a different plug-in.;
+#X text 37 398 Outlets:;
+#X text 37 422 1-2: Signal outlets.;
 #X text 37 437 3: Messages from [vstplugin~].;
-#X text 37 482 Creation arguments:;
-#X text 37 506 1: A symbol \, for the name of the plug-in to load \,
+#X text 37 466 Creation arguments:;
+#X text 37 490 1: A symbol \, for the name of the plug-in to load \,
 or 'ask' to get a file browser dialog.;
-#X text 37 543 2: 1 = automatically open the VST GUI after loading
+#X text 37 527 2: 1 = automatically open the VST GUI after loading
 \; 0 = don't open it. (Default is 0.) \; A 1 here adds the -e flag
 to the 'open' message \, to use the VST's built-in GUI.;
+#X text 37 40 Automatic-open interface conveniences for Christof Ressi's
+[vstplugin~] external. You should install [vstplugin~] separately.
+Note that this abstraction is a work in progress and may change.,
+f 70;
+#X text 37 97 [vstplug-hjh~] does not replace [vstplugin~]! In its
+current version \, it only adds a couple of GUI controls (hence \,
+isn't very useful).;
+#X obj 347 171 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#N canvas 0 0 450 300 download-vstplugin~ 0;
+#X obj 37 37 inlet;
+#X msg 37 62 browse https://git.iem.at/pd/vstplugin/-/releases;
+#X obj 37 87 pdcontrol;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X restore 347 191 pd download-vstplugin~;
+#X connect 14 0 15 0;
