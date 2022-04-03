@@ -20,6 +20,18 @@
 #X obj 271 63 t b b b, f 20;
 #X text 349 16 (must be sure array is ready before initial trigger)
 , f 29;
+#X text 250 288 Dirac-impulse table idea comes from solipp at the PD
+user forum, f 37;
+#X obj 253 334 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#N canvas 0 0 556 300 dirac-credit-where-due 0;
+#X obj 37 37 inlet;
+#X msg 37 62 browse https://forum.pdpatchrepo.info/topic/13484/dirac-impulse-based-on-control-message-trigger/3
+;
+#X obj 37 117 pdcontrol;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X restore 253 354 pd dirac-credit-where-due;
 #X connect 1 0 2 0;
 #X connect 2 0 13 0;
 #X connect 3 0 16 0;
@@ -40,3 +52,4 @@
 #X connect 18 0 2 0;
 #X connect 18 1 4 0;
 #X connect 18 2 3 0;
+#X connect 21 0 22 0;
