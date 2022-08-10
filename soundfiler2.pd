@@ -1,4 +1,4 @@
-#N canvas 600 103 691 526 12;
+#N canvas 467 104 716 526 12;
 #X obj 38 37 inlet list;
 #X obj 38 62 soundfiler;
 #X obj 105 87 unpack 0;
@@ -26,6 +26,8 @@
 #X obj 321 427 pack 0 0 0 0 0;
 #X obj 38 162 t b b b b b;
 #X obj 360 184 * 0.001;
+#X obj 504 225 r pd-dsp-started;
+#X obj 504 250 t b b b;
 #X connect 0 0 1 0;
 #X connect 1 0 7 0;
 #X connect 1 1 2 0;
@@ -67,3 +69,6 @@
 #X connect 25 3 17 0;
 #X connect 25 4 16 0;
 #X connect 26 0 22 0;
+#X connect 27 0 28 0;
+#X connect 28 0 4 0;
+#X connect 28 1 3 0;

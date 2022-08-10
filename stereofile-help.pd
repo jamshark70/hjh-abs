@@ -1,32 +1,64 @@
 #N canvas 582 125 637 579 12;
-#X msg 65 179 all;
-#X obj 81 245 dac~;
-#X obj 181 229 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
--1 -1;
-#X obj 240 184 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
--1 -1;
-#X floatatom 240 229 5 0 0 0 - - -;
-#X obj 65 102 stereofile sf2 computers.wav 0 -1;
-#X text 313 86 This creates two tables (sf2_LEFT and sf2_RIGHT) and
+#X msg 25 179 all;
+#X obj 41 245 dac~;
+#X obj 141 229 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 200 184 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X floatatom 200 229 5 0 0 0 - - - 0;
+#X obj 25 102 stereofile sf2 computers.wav 0 -1;
+#X text 273 86 This creates two tables (sf2_LEFT and sf2_RIGHT) and
 also a [soundfiler2 sf2]. Use sf2*** tags for [value] boxes. sf-play2
 will look for the L and R tables., f 38;
-#X obj 65 204 sf-play2~ sf2 200;
-#X text 63 478 Note that 'computers.wav' is mono \, so sf2_RIGHT will
+#X obj 25 204 sf-play2~ sf2 200;
+#X text 23 478 Note that 'computers.wav' is mono \, so sf2_RIGHT will
 be empty and you will hear only the left channel. \; \; Try substituting
 your own stereo file.;
-#X text 62 281 Arguments: \; 1 Table name - this CANNOT BE CHANGED
+#X text 22 281 Arguments: \; 1 Table name - this CANNOT BE CHANGED
 later - must be given at creation time \; 2 Path to a mono soundfile
 (only first channel is read) \; 3 Start frame (default 0) \; 4 Number
 of frames to read - '-1' is treated specially as "read to end of file"
 (but only -1 \, not all negative numbers) \; \; Inlet: A list giving
 path \, start frame \, numframes \, to refill the table from disk \;
 \; Outlet: Same as [soundfiler2] (soundfile stats)., f 63;
-#X text 61 18 stereofile: automatically load a stereo soundfile into
+#X text 21 18 stereofile: automatically load a stereo soundfile into
 two arrays (name_LEFT and name_RIGHT) \, keeping stats with soundfiler2
 -- hjh;
-#X text 371 176 'value' variables are populated internally by [soundfiler2].
+#X text 331 176 'value' variables are populated internally by [soundfiler2].
 Use [getvalue] to prevent accidental overwrites., f 25;
-#X obj 240 204 getvalue sf2dur;
+#X obj 200 204 getvalue sf2dur;
+#X obj 438 481 cnv 15 172 60 empty empty empty 20 12 0 14 #ffe3c6 #404040
+0;
+#N canvas 475 128 458 408 SampleRate 0;
+#X text 16 16 If you open a patch using soundfiler2 while DSP is off
+\, Pd may be unable to determine the correct system sample rate.;
+#X text 16 59 In this case \, the 'xxxscale' [value] may be incorrect.
+;
+#X obj 191 230 t b b, f 8;
+#X msg 191 255 100;
+#X obj 191 280 *, f 8;
+#X obj 107 170 receive pd-dsp-started;
+#X floatatom 191 305 5 0 0 0 - - - 0;
+#X obj 191 210 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 107 195 delay 10;
+#X text 16 87 Any calculations in your patch based on 'scale' \, then
+\, should be retriggered based on the pd-dsp-started signal. A short
+delay is necessary to guarantee that soundfiler2 processes the trigger
+before your patch does.;
+#X text 16 347 (The 'pd-dsp-started' signal is documented in [samplerate~]
+help.);
+#X obj 244 255 getvalue sf2scale;
+#X connect 2 0 3 0;
+#X connect 2 1 11 0;
+#X connect 3 0 4 0;
+#X connect 4 0 6 0;
+#X connect 5 0 8 0;
+#X connect 7 0 2 0;
+#X connect 8 0 2 0;
+#X connect 11 0 4 1;
+#X restore 480 511 pd SampleRate;
+#X text 452 487 An important note on;
 #X connect 0 0 7 0;
 #X connect 3 0 12 0;
 #X connect 7 0 1 0;

@@ -1,9 +1,9 @@
 #N canvas 541 93 676 630 12;
 #X obj 50 194 soundfiler2 a1;
 #X text 52 475 Argument: An identifier for the [value] objects.;
-#X text 51 66 [soundfiler] provides the array size and sample rate
+#X text 51 60 [soundfiler] provides the array size and sample rate
 as outputs.;
-#X text 50 108 [soundfiler2] uses these to set up [value] objects to
+#X text 50 102 [soundfiler2] uses these to set up [value] objects to
 facilitate time value conversion.;
 #X text 51 496 Inlets:;
 #X text 64 516 1 A "read" message \, to forward to [soundfiler].;
@@ -14,14 +14,14 @@ in ms \, sample rate \, samples per ms \, and rate scale.;
 #X obj 157 194 array define a1;
 #X msg 50 169 read -resize computers.wav a1;
 #X obj 50 219 print stats;
-#X obj 312 174 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
--1 -1;
+#X obj 312 174 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
 #X obj 312 194 t b b b b b, f 28;
-#X floatatom 505 269 5 0 0 0 - - -;
-#X floatatom 456 318 5 0 0 0 - - -;
-#X floatatom 408 367 5 0 0 0 - - -;
-#X floatatom 305 269 5 0 0 0 - - -;
-#X floatatom 173 269 5 0 0 0 - - -;
+#X floatatom 505 269 5 0 0 0 - - - 0;
+#X floatatom 456 318 5 0 0 0 - - - 0;
+#X floatatom 408 367 5 0 0 0 - - - 0;
+#X floatatom 305 269 5 0 0 0 - - - 0;
+#X floatatom 173 269 5 0 0 0 - - - 0;
 #X obj 173 312 pack 0 0;
 #X msg 173 337 0 \, \$1 \$2;
 #X obj 173 362 line~;
@@ -37,6 +37,39 @@ in ms \, sample rate \, samples per ms \, and rate scale.;
 #X obj 173 244 getvalue a1frames;
 #X text 312 407 Note: [getvalue] prevents accidentally overwriting
 the soundfile properties., f 41;
+#X obj 472 103 cnv 15 172 60 empty empty empty 20 12 0 14 #ffe3c6 #404040
+0;
+#N canvas 475 128 458 408 SampleRate 0;
+#X text 16 16 If you open a patch using soundfiler2 while DSP is off
+\, Pd may be unable to determine the correct system sample rate.;
+#X text 16 59 In this case \, the 'xxxscale' [value] may be incorrect.
+;
+#X obj 191 230 t b b, f 8;
+#X obj 244 255 getvalue a1scale;
+#X msg 191 255 100;
+#X obj 191 280 *, f 8;
+#X obj 107 170 receive pd-dsp-started;
+#X floatatom 191 305 5 0 0 0 - - - 0;
+#X obj 191 210 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 107 195 delay 10;
+#X text 16 87 Any calculations in your patch based on 'scale' \, then
+\, should be retriggered based on the pd-dsp-started signal. A short
+delay is necessary to guarantee that soundfiler2 processes the trigger
+before your patch does.;
+#X text 16 347 (The 'pd-dsp-started' signal is documented in [samplerate~]
+help.);
+#X connect 2 0 4 0;
+#X connect 2 1 3 0;
+#X connect 3 0 5 1;
+#X connect 4 0 5 0;
+#X connect 5 0 7 0;
+#X connect 6 0 9 0;
+#X connect 8 0 2 0;
+#X connect 9 0 2 0;
+#X restore 514 133 pd SampleRate;
+#X text 486 109 An important note on;
+#X obj 50 144 loadbang;
 #X connect 0 0 10 0;
 #X connect 9 0 0 0;
 #X connect 11 0 12 0;
@@ -58,3 +91,4 @@ the soundfile properties., f 41;
 #X connect 27 0 15 0;
 #X connect 28 0 16 0;
 #X connect 29 0 17 0;
+#X connect 34 0 9 0;

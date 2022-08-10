@@ -5,11 +5,11 @@
 #X obj 65 83 monofile sf1 computers.wav 0 -1;
 #X text 61 18 monofile: automatically load a mono soundfile into an
 array \, keeping stats with soundfiler2 -- hjh;
-#X obj 174 170 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
--1 -1;
-#X obj 240 125 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
--1 -1;
-#X floatatom 240 170 5 0 0 0 - - -;
+#X obj 174 170 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 240 125 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X floatatom 240 170 5 0 0 0 - - - 0;
 #X text 62 241 Arguments: \; 1 Table name - this CANNOT BE CHANGED
 later - must be given at creation time \; 2 Path to a mono soundfile
 (only first channel is read) \; 3 Start frame (default 0) \; 4 Number
@@ -18,8 +18,40 @@ of frames to read - '-1' is treated specially as "read to end of file"
 path \, start frame \, numframes \, to refill the table from disk \;
 \; Outlet: Same as [soundfiler2] (soundfile stats)., f 63;
 #X obj 240 145 getvalue sf1dur;
-#X text 364 117 'value' variables are populated internally by [soundfiler2].
+#X text 365 131 'value' variables are populated internally by [soundfiler2].
 Use [getvalue] to prevent accidental overwrites., f 25;
+#X obj 364 64 cnv 15 172 60 empty empty empty 20 12 0 14 #ffe3c6 #404040
+0;
+#N canvas 475 128 458 408 SampleRate 0;
+#X text 16 16 If you open a patch using soundfiler2 while DSP is off
+\, Pd may be unable to determine the correct system sample rate.;
+#X text 16 59 In this case \, the 'xxxscale' [value] may be incorrect.
+;
+#X obj 191 230 t b b, f 8;
+#X msg 191 255 100;
+#X obj 191 280 *, f 8;
+#X obj 107 170 receive pd-dsp-started;
+#X floatatom 191 305 5 0 0 0 - - - 0;
+#X obj 191 210 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 107 195 delay 10;
+#X text 16 87 Any calculations in your patch based on 'scale' \, then
+\, should be retriggered based on the pd-dsp-started signal. A short
+delay is necessary to guarantee that soundfiler2 processes the trigger
+before your patch does.;
+#X text 16 347 (The 'pd-dsp-started' signal is documented in [samplerate~]
+help.);
+#X obj 244 255 getvalue sf1scale;
+#X connect 2 0 3 0;
+#X connect 2 1 11 0;
+#X connect 3 0 4 0;
+#X connect 4 0 6 0;
+#X connect 5 0 8 0;
+#X connect 7 0 2 0;
+#X connect 8 0 2 0;
+#X connect 11 0 4 1;
+#X restore 406 94 pd SampleRate;
+#X text 378 70 An important note on;
 #X connect 0 0 2 0;
 #X connect 2 0 1 1;
 #X connect 2 0 1 0;
