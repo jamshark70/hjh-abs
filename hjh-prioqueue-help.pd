@@ -1,0 +1,74 @@
+#N canvas 533 29 506 649 12;
+#X msg 105 346 clear;
+#N canvas 217 136 450 349 randomfill 0;
+#X obj 41 33 inlet;
+#X msg 41 58 10;
+#X obj 41 83 until;
+#X obj 41 108 t b b, f 14;
+#X obj 41 133 random 100;
+#X msg 41 208 push \$1 \$2;
+#X obj 41 233 t a a;
+#X obj 73 258 print;
+#X obj 41 283 outlet;
+#X obj 258 26 text define -k \$0-words;
+#A set Then \; sigh \; not \; so \; but \; let \; them \; go \; And
+\; be \; you \; blithe \; and \; bonny \; Converting \; all \; your
+\; sounds \; of \; woe \; Into \; Hey \; nonny \; nonny;
+#X obj 175 83 loadbang;
+#X obj 175 108 text size \$0-words;
+#X obj 136 133 random;
+#X obj 136 158 text get \$0-words;
+#X obj 41 183 pack f s, f 14;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 3 1 12 0;
+#X connect 4 0 14 0;
+#X connect 5 0 6 0;
+#X connect 6 0 8 0;
+#X connect 6 1 7 0;
+#X connect 10 0 11 0;
+#X connect 11 0 12 1;
+#X connect 12 0 13 0;
+#X connect 13 0 14 1;
+#X connect 14 0 5 0;
+#X restore 239 346 pd randomfill;
+#X obj 239 326 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X msg 155 346 pop;
+#X msg 193 346 top;
+#X obj 239 418 print;
+#X obj 327 418 print empty;
+#X text 35 16 hjh-prioqueue - a priority queue that associates a priority
+(time index) with an arbitrary message - hjh;
+#X text 35 151 A "pop" request retrieves the list with the earliest
+priority \, and returns the priority + the list. Then this item is
+removed \, and the next "pop" will get the next priority and so on.
+When the queue is empty \, a bang is sent out the right inlet.;
+#X text 35 240 A "top" request returns the earliest priority list \,
+but without removing from the queue (so a subsequent "pop" will return
+the same). "topPrio" returns the earliest priority value without the
+associated list (more efficient for asking "what is the next time?").
+;
+#X text 35 428 Arguments: none \; \; Inlet: \; - "push float list..."
+= insert the values into the queue \, in order of the first number
+\; - "pop" = get and remove the earliest-priority list \; - "top" =
+get and keep the earliest-priority list \; - "topPrio" = get and keep
+the earliest priority value only \; - "clear" = delete all entries
+and start fresh. \; \; Outlets: \; 1 A priority+list that had been
+previously stored. \; 2 "Bang" when a pop/top request is made of an
+empty queue., f 61;
+#X obj 239 393 hjh-prioqueue;
+#X text 35 63 A priority queue is also known as a heap. You "push"
+items into the queue \, where each item has a "priority" (which you
+can also think of as a time index \, for scheduling) and some data
+associated with it. In [hjh-prioqueue] \, the associated datum is an
+arbitrary list.;
+#X connect 0 0 11 0;
+#X connect 1 0 11 0;
+#X connect 2 0 1 0;
+#X connect 3 0 11 0;
+#X connect 4 0 11 0;
+#X connect 11 0 5 0;
+#X connect 11 1 6 0;
