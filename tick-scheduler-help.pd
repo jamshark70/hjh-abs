@@ -175,8 +175,8 @@ barline (quantized sequence onset)., f 53;
 #X restore 403 339 pd master_transport_example;
 #X text 38 445 Arguments: None.;
 #X text 37 476 Inlets: \; 1 Timeslice messages (two numbers "A B" define
-a timeslice A <= time < (A+B)). Also "clear" and "tempo..." messages (see
-the transport example). \; 2 Messages to schedule. The list should
+a timeslice A <= time < (A+B)). Also "clear" and "tempo..." messages
+(see the transport example). \; 2 Messages to schedule. The list should
 begin with a float for the scheduled time.;
 #X text 37 582 Outlet: The scheduled list (with time prefix).;
 #N canvas 456 113 600 489 post_tick_timing 0;
@@ -253,10 +253,6 @@ time slice \, and will be output after 200 ms (1200 - 1000 = 200).
 #X obj 119 278 + 1000;
 #X obj 39 402 print tick;
 #X text 276 201 <-- click to schedule at the next 2000ms mark;
-#X obj 377 403 cnv 15 254 42 empty empty empty 20 12 0 14 #ffc7c6 #404040
-0;
-#X text 386 407 DEPENDENCY: pdcontainer external \; use deken to install
-it;
 #X obj 355 277 + 2000;
 #X msg 355 302 \$1 twoSecLater;
 #X connect 7 0 8 0;
@@ -273,12 +269,12 @@ it;
 #X connect 14 0 15 0;
 #X connect 15 0 16 0;
 #X connect 17 0 19 0;
-#X connect 17 0 27 0;
+#X connect 17 0 25 0;
 #X connect 18 0 17 1;
 #X connect 19 0 20 0;
 #X connect 20 0 21 0;
 #X connect 20 0 15 1;
 #X connect 22 0 12 1;
-#X connect 27 0 28 0;
-#X connect 28 0 21 0;
-#X connect 28 0 15 1;
+#X connect 25 0 26 0;
+#X connect 26 0 21 0;
+#X connect 26 0 15 1;
