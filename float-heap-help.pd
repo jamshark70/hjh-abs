@@ -1,21 +1,21 @@
-#N canvas 533 29 506 649 12;
-#X text 35 18 float-heap - a heap implementation that associates a
-priority (time index) with a float - hjh;
-#X text 35 65 A heap is also known as a priority queue. You "push"
+#N canvas 533 29 579 649 12;
+#X text 35 8 float-heap - a heap implementation that associates a priority
+(time index) with a float - hjh;
+#X text 35 55 A heap is also known as a priority queue. You "push"
 items into the queue \, where each item has a "priority" (which you
 can also think of as a time index \, for scheduling) and some data
 associated with it. In [float-heap] \, the associated datum is a single
 float. See [hjh-prioqueue] for a queue that associates an arbitrary
 list with the priority.;
-#X text 35 171 A "pop" request retrieves the datum with the earliest
+#X text 35 161 A "pop" request retrieves the datum with the earliest
 priority \, and returns the priority + the datum. Then this item is
 removed \, and the next "pop" will get the next priority and so on.
 When the queue is empty \, a bang is sent out the right inlet.;
-#X text 35 259 A "top" request returns the earliest priority data \,
+#X text 35 249 A "top" request returns the earliest priority data \,
 but without removing from the queue (so a subsequent "pop" will return
 the same). This is useful in a scheduler to query the current state
 without modifying it.;
-#X msg 105 361 clear;
+#X msg 105 351 clear;
 #N canvas 0 0 450 300 randomfill 0;
 #X obj 41 33 inlet;
 #X msg 41 58 10;
@@ -39,25 +39,26 @@ without modifying it.;
 #X connect 7 0 8 0;
 #X connect 8 0 10 0;
 #X connect 8 1 9 0;
-#X restore 239 361 pd randomfill;
-#X obj 239 341 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#X restore 239 351 pd randomfill;
+#X obj 239 331 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X obj 239 408 float-heap;
-#X msg 155 361 pop;
-#X msg 193 361 top;
-#X obj 239 433 print;
-#X obj 306 433 print empty;
-#X text 35 437 Arguments: none \; \; Inlet: \; - "push float float"
+#X obj 239 398 float-heap;
+#X msg 155 351 pop;
+#X msg 193 351 top;
+#X obj 239 423 print;
+#X obj 306 423 print empty;
+#X text 35 427 Arguments: none \; \; Inlet: \; - "push float float"
 = insert the values into the queue \, in order of the first number
 \; - "pop" = get and remove the earliest-priority pair \; - "top" =
 get and keep the earliest-priority pair \; - "clear" = delete all entries
 and start fresh. \; \; Outlets: \; 1 A pair of values that had been
-previously stored. \; 2 "Bang" when a pop/top request is made of an
-empty queue.;
+previously stored. \; 2 After push or pop \, returns the new "top"
+pair (or bang if empty) \; 3 "Bang" when a pop/top request is made
+of an empty queue., f 70;
 #X connect 4 0 7 0;
 #X connect 5 0 7 0;
 #X connect 6 0 5 0;
 #X connect 7 0 10 0;
-#X connect 7 1 11 0;
+#X connect 7 2 11 0;
 #X connect 8 0 7 0;
 #X connect 9 0 7 0;
