@@ -1,0 +1,57 @@
+#N canvas 370 29 806 543 12;
+#X declare -path hjh-abs;
+#X text 41 41 playhead-tick: Massage Camomile [r playhead] messages
+into a format suitable for [tick-scheduler];
+#X text 41 86 NOTE: This object is unlikely to do anything useful outside
+of a Camomile-based plugin (such as PlugData) \, hosted in a DAW with
+a timeline. If you run it in Pd-vanilla \, it will do nothing.;
+#N canvas 0 0 450 300 PlugData 0;
+#X obj 110 103 bng 15 250 50 0 empty empty PlugData 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X msg 62 159 browse https://github.com/timothyschoen/PlugData;
+#X obj 62 184 pdcontrol;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X coords 0 -1 1 1 85 21 2 100 100;
+#X restore 371 136 pd PlugData;
+#X text 41 165 Camomile plugins send a number of messages to "playhead
+\, " I believe on every Pd control tick. These are difficult to use
+because many are repeated (redundant) \, and their order is interleaved
+\, making it harder to detect changes in status. Also \, playhead position
+messages do not align with whole beats \, making them harder to use
+for scheduling.;
+#X text 41 271 [playhead-tick] simplifies host sync by 1/ eliminating
+duplicate messages and 2/ emitting timeslice messages that you can
+use directly with [tick-scheduler]., f 60;
+#X obj 43 350 playhead-tick, f 60;
+#X obj 44 15 declare -path hjh-abs;
+#X obj 43 448 tick-scheduler;
+#X text 153 427 left two outlets are: \; 1/ timeslice messages \; 2/
+"tempo x permin" messages \; You should attach both to the scheduler.
+, f 31;
+#X text 215 372 raw position values \; IMO not especially useful,
+f 24;
+#X text 418 372 all messages except for position and tempo (which are
+emitted from other outlets), f 22;
+#N canvas 438 115 521 524 playhead-messages 0;
+#X obj 42 29 r playhead;
+#X text 39 68 ... emits the following messages \, always in the following
+order: \; \; "playing 0/1" \; "recording 0/1" \; "looping 0/1" \; "bpm
+(tempo)" + 2 other numbers \; "lastbar" + 3 numbers \; "timesig (beats-per-bar)"
++ 2 numbers \; "position (beats)" + more numbers (ignored). \; \; This
+help patch is not comprehensive Camomile documentation. \; \; "bpm"
+messages are redirected to the [playhead-tick] object's second outlet
+\, and reformatted as "tempo xxx permin" (to feed directly into [tick-scheduler]
+\, [delay] or [metro]). If you need the bpm as a number \, do [unpack
+s f] and take the right outlet. \; \; "position" messages are translated
+into beat-by-beat timeslices \, and also forwarded to the third outlet.
+\; \; All other messages are debounced and forwarded to the fourth
+outlet., f 62;
+#X restore 580 71 pd playhead-messages;
+#X text 528 124 Outlets: \; 1/ Timeslice messages ("time 1") \; 2/
+"tempo xxx permin" messages \; 3/ "position (beats)" messages \; 4/
+All other messages. \; \; 4th outlet messages: \; - "playing 0/1" \;
+- "playAtBeat 0/1 (beat)" \; - "recording 0/1" \; - "looping 0/1" \;
+- "lastbar (beat-at-last-bar)" \; - "timesig (beats-per-bar)".;
+#X connect 5 0 7 0;
+#X connect 5 1 7 0;
