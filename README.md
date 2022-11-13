@@ -26,7 +26,7 @@ A small collection of only loosely maintained Pure Data utility abstractions.
 - Dependencies available from deken.
   - Cyclone.
   - [recorder~] depends on zexy.
-  - [tick-scheduler] depends on pdcontainer.
+  - ~~[tick-scheduler] depends on pdcontainer.~~ Removed!
   - [fader~] and related objects depend on iemguts.
   - [formlet~] depends on the ELSE library.
   - Many help patches use pddp/ezoutput~.
