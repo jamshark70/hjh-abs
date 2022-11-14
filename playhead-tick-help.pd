@@ -40,9 +40,9 @@ messages are redirected to the [playhead-tick] object's second outlet
 \, and reformatted as "tempo xxx permin" (to feed directly into [tick-scheduler]
 \, [delay] or [metro]). If you need the bpm as a number \, do [unpack
 s f] and take the right outlet. \; \; "position" messages are translated
-into beat-by-beat timeslices \, and also forwarded to the third outlet.
-\; \; All other messages are debounced and forwarded to the fourth
-outlet., f 62;
+into beat-tick messages in the first outlet. Raw position messages
+are suppresssed. \; \; All other messages are debounced and forwarded
+to the fourth outlet., f 62;
 #X restore 580 71 pd playhead-messages;
 #X text 528 124 Outlets: \; 1/ Timeslice messages ("time 1") \; 2/
 "tempo xxx permin" messages \; 3/ "position (beats)" messages \; 4/
