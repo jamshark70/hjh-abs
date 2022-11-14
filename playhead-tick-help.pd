@@ -1,4 +1,4 @@
-#N canvas 370 29 806 543 12;
+#N canvas 370 29 806 581 12;
 #X declare -path hjh-abs;
 #X text 41 41 playhead-tick: Massage Camomile [r playhead] messages
 into a format suitable for [tick-scheduler];
@@ -26,13 +26,9 @@ use directly with [tick-scheduler]., f 60;
 #X obj 43 350 playhead-tick, f 60;
 #X obj 44 15 declare -path hjh-abs;
 #X obj 43 448 tick-scheduler;
-#X text 153 427 left two outlets are: \; 1/ timeslice messages \; 2/
+#X text 155 412 left two outlets are: \; 1/ timeslice messages \; 2/
 "tempo x permin" messages \; You should attach both to the scheduler.
 , f 31;
-#X text 215 372 raw position values \; IMO not especially useful,
-f 24;
-#X text 418 372 all messages except for position and tempo (which are
-emitted from other outlets), f 22;
 #N canvas 438 115 521 524 playhead-messages 0;
 #X obj 42 29 r playhead;
 #X text 39 68 ... emits the following messages \, always in the following
@@ -53,5 +49,15 @@ outlet., f 62;
 All other messages. \; \; 4th outlet messages: \; - "playing 0/1" \;
 - "playAtBeat 0/1 (beat)" \; - "recording 0/1" \; - "looping 0/1" \;
 - "lastbar (beat-at-last-bar)" \; - "timesig (beats-per-bar)".;
+#X text 392 372 all messages except for position and tempo (tempo is
+emitted from outlet 2 \, raw position messages are suppressed), f
+22;
+#X text 570 372 If you need raw position messages \, you can get them
+from your own [r playhead]:, f 28;
+#X obj 610 432 r playhead;
+#X obj 610 457 route position;
+#X text 570 493 I do not feel this is especially useful \, though,
+f 28;
 #X connect 5 0 7 0;
 #X connect 5 1 7 0;
+#X connect 13 0 14 0;
