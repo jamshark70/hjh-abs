@@ -44,11 +44,6 @@ into beat-tick messages in the first outlet. Raw position messages
 are suppresssed. \; \; All other messages are debounced and forwarded
 to the fourth outlet., f 62;
 #X restore 580 71 pd playhead-messages;
-#X text 528 124 Outlets: \; 1/ Timeslice messages ("time 1") \; 2/
-"tempo xxx permin" messages \; 3/ "position (beats)" messages \; 4/
-All other messages. \; \; 4th outlet messages: \; - "playing 0/1" \;
-- "playAtBeat 0/1 (beat)" \; - "recording 0/1" \; - "looping 0/1" \;
-- "lastbar (beat-at-last-bar)" \; - "timesig (beats-per-bar)".;
 #X text 392 372 all messages except for position and tempo (tempo is
 emitted from outlet 2 \, raw position messages are suppressed), f
 22;
@@ -58,6 +53,11 @@ from your own [r playhead]:, f 28;
 #X obj 610 457 route position;
 #X text 570 493 I do not feel this is especially useful \, though,
 f 28;
+#X text 528 124 Outlets: \; 1/ Timeslice messages ("time 1") \; 2/
+"tempo xxx permin" messages \; 3/ All other messages. \; \; 4th outlet
+messages: \; - "playing 0/1" \; - "playAtBeat 0/1 (beat)" \; - "recording
+0/1" \; - "looping 0/1" \; - "lastbar (beat-at-last-bar)" \; - "timesig
+(beats-per-bar)".;
 #X connect 5 0 7 0;
 #X connect 5 1 7 0;
-#X connect 13 0 14 0;
+#X connect 12 0 13 0;
