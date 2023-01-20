@@ -1,0 +1,125 @@
+#N canvas 521 59 520 622 12;
+#X text 30 32 burst - produce a series of timed triggers up to a given
+duration \, at a given subdivision - hjh;
+#X text 30 82 Effectively \, a clock multiplier. Because you need to
+retrigger it periodically \, it is useful in situations where Pd is
+not in complete control of timing (e.g. abl_link~ \, or PlugData running
+in a DAW). Modeled after an analog-style burst generator \, which produces
+a series of triggers in response to a single input trigger.;
+#X msg 72 234 0;
+#X text 109 234 initial time value for this burst;
+#X msg 81 264 1000 500;
+#X text 154 264 initial time value and total duration;
+#X msg 93 295 2000 500 67.5;
+#X text 203 295 initial time \, duration \, subdivision;
+#X obj 53 203 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
+#X text 71 201 bang: advance according to latest duration/subdivision
+;
+#X obj 155 372 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X text 173 370 bang at end;
+#X floatatom 53 372 5 0 0 0 - - - 0;
+#X obj 53 347 burst 500 125 0;
+#X text 30 504 Creation arguments are the same as inlets 2-4.;
+#X text 30 538 Outlets: \; 1 Time value of each subdivided tick \;
+2 Bang at end.;
+#X text 30 413 Inlets: \; 1 Initial time for this burst (or bang) \;
+2 Burst duration (non-inclusive) \; 3 Subdivision (duration of each
+tick) \; 4 Sensitivity (use for inexact division).;
+#N canvas 454 43 503 779 clock-multiplier 0;
+#X obj 247 67 hsl 128 15 40 240 0 1 empty empty tempo -2 -8 0 10 #fcfcfc
+#000000 #000000 2600 1;
+#X obj 244 87 int;
+#X floatatom 244 112 5 0 0 0 - - - 0;
+#X msg 244 136 tempo \$1 permin;
+#X obj 42 194 metro 1;
+#X text 56 148 quarter notes;
+#X obj 42 68 tgl 35 0 empty empty empty 17 7 0 10 #fcfcfc #000000 #000000
+0 1;
+#X obj 73 271 burst 1 0.25;
+#X text 88 293 clock-multiply to 16ths, f 15;
+#X floatatom 73 328 5 0 0 0 - - - 0;
+#X obj 42 328 bng 19 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
+#X text 40 547 The metro generates quarter notes at the given tempo
+(and you can change the tempo on the fly).;
+#X text 39 593 [burst 1 0.25]: each burst is 1 quarter note in total
+\, where each trigger is 0.25 beat apart.;
+#X floatatom 244 328 5 0 0 0 - - - 0;
+#X text 259 293 clock-multiply to triplets, f 15;
+#X obj 244 271 burst 1 0.333333 0.01;
+#X text 40 639 Note that the triplet subdivision is not an exact quotient.
+To avoid overflow or doubled ticks \, we specify a sensitivity value
+to cause a burst to end slightly early. Because the burst generator
+gets "ticked" according to the main tempo \, however \, the triplet
+triggers will not drift over time relative to the 16ths. (If you simply
+ran a metro at 0.333333 beat \, eventually it would drift.);
+#N canvas 475 283 538 300 synth 0;
+#X obj 44 28 inlet;
+#X obj 194 28 inlet;
+#X obj 344 28 inlet;
+#X msg 44 68 1 5 \, 0 90 5;
+#X obj 44 93 vline~;
+#X obj 104 93 osc~ 220;
+#X obj 44 118 *~, f 9;
+#X msg 194 68 1 5 \, 0 90 5;
+#X obj 194 93 vline~;
+#X obj 194 118 *~, f 9;
+#X obj 254 93 osc~ 440;
+#X msg 344 68 1 5 \, 0 90 5;
+#X obj 344 93 vline~;
+#X obj 344 118 *~, f 9;
+#X obj 404 93 osc~ 660;
+#X obj 194 203 outlet~;
+#X connect 0 0 3 0;
+#X connect 1 0 7 0;
+#X connect 2 0 11 0;
+#X connect 3 0 4 0;
+#X connect 4 0 6 0;
+#X connect 5 0 6 1;
+#X connect 6 0 15 0;
+#X connect 7 0 8 0;
+#X connect 8 0 9 0;
+#X connect 9 0 15 0;
+#X connect 10 0 9 1;
+#X connect 11 0 12 0;
+#X connect 12 0 13 0;
+#X connect 13 0 15 0;
+#X connect 14 0 13 1;
+#X restore 125 401 pd synth;
+#X obj 125 426 *~, f 15;
+#X obj 125 451 dac~;
+#X obj 273 382 hsl 128 15 -60 0 0 1 empty empty empty -2 -8 0 10 #fcfcfc
+#000000 #000000 8500 1;
+#X floatatom 270 402 5 0 0 0 - - - 0;
+#X obj 270 451 dbtorms;
+#X obj 270 426 + 100;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 3 0 7 0;
+#X connect 3 0 15 0;
+#X connect 4 0 7 0;
+#X connect 4 0 10 0;
+#X connect 4 0 15 0;
+#X connect 6 0 4 0;
+#X connect 7 0 9 0;
+#X connect 9 0 17 1;
+#X connect 10 0 17 0;
+#X connect 13 0 17 2;
+#X connect 15 0 13 0;
+#X connect 17 0 18 0;
+#X connect 18 0 19 0;
+#X connect 20 0 21 0;
+#X connect 21 0 23 0;
+#X connect 22 0 18 1;
+#X connect 23 0 22 0;
+#X restore 294 336 pd clock-multiplier;
+#X connect 2 0 13 0;
+#X connect 4 0 13 0;
+#X connect 6 0 13 0;
+#X connect 8 0 13 0;
+#X connect 13 0 12 0;
+#X connect 13 1 10 0;

@@ -1,0 +1,37 @@
+#N canvas 560 52 494 547 12;
+#X declare -path hjh-abs;
+#X text 43 29 round / roundUp - round a value to the nearest /n/ -
+hjh;
+#X text 44 62 Many rounding functions can round only to the nearest
+integer. For time (metrical) values in particular \, it is useful to
+round to the nearest multiple of a given /n/. [round] does this. [roundUp]
+rounds to the next higher multiple of /n/.;
+#X obj 82 171 declare -path hjh-abs;
+#X obj 82 311 round 0.25;
+#X obj 82 217 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
+#X obj 82 237 random 1000;
+#X obj 82 262 * 0.01;
+#X floatatom 82 287 5 0 0 0 - - - 0;
+#X floatatom 82 336 5 0 0 0 - - - 0;
+#X obj 250 217 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 250 237 random 1000;
+#X obj 250 262 * 0.01;
+#X floatatom 250 287 5 0 0 0 - - - 0;
+#X floatatom 250 336 5 0 0 0 - - - 0;
+#X obj 250 311 roundUp 0.25;
+#X text 44 394 Inlets: \; 1 Number to be rounded (or two numbers \,
+for both inputs) \; 2 The /n/ factor.;
+#X text 44 454 Outlet: The rounded number.;
+#X text 45 484 Argument: The /n/ factor (default = 1).;
+#X connect 3 0 8 0;
+#X connect 4 0 5 0;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 7 0 3 0;
+#X connect 9 0 10 0;
+#X connect 10 0 11 0;
+#X connect 11 0 12 0;
+#X connect 12 0 14 0;
+#X connect 14 0 13 0;
