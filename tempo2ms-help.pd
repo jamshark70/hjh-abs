@@ -1,0 +1,36 @@
+#N canvas 475 86 532 563 12;
+#X declare -path hjh-abs;
+#X obj 116 156 declare -path hjh-abs;
+#X obj 116 343 tempo2ms;
+#X obj 119 207 hsl 128 15 40 240 0 1 empty empty bpm -2 -8 0 10 #fcfcfc
+#000000 #000000 5100 1;
+#X floatatom 116 302 5 0 0 0 beatsAtTempo - - 0;
+#X obj 116 227 int;
+#X floatatom 116 252 5 0 0 0 - - - 0;
+#X msg 190 301 tempo \$1 permin;
+#X obj 116 276 t b f, f 11;
+#X floatatom 116 368 5 0 0 0 ms - - 0;
+#X text 36 28 tempo2ms - convert a time value from beats to ms - hjh
+;
+#X floatatom 347 260 5 0 0 0 beatsAtTempo - - 0;
+#X floatatom 347 326 5 0 0 0 ms - - 0;
+#X obj 347 301 tempo2ms 84 permin;
+#X text 36 63 tempo2ms accepts tempo messages (see [delay] help). After
+this \, numbers received at the inlet will be converted from the last
+given tempo into ms.;
+#X text 36 414 Inlet: float (beats) \, or "tempo xxx yyy" messages
+;
+#X text 36 447 Outlet: time in ms;
+#X text 37 481 Arguments: The "xxx yyy" of the tempo message (without
+tempo keyword). Default is "1 permillisecond" (output = input).;
+#X text 353 215 default tempo in object arguments, f 16;
+#X connect 1 0 8 0;
+#X connect 2 0 4 0;
+#X connect 3 0 1 0;
+#X connect 4 0 5 0;
+#X connect 5 0 7 0;
+#X connect 6 0 1 0;
+#X connect 7 0 3 0;
+#X connect 7 1 6 0;
+#X connect 10 0 12 0;
+#X connect 12 0 11 0;
