@@ -1,0 +1,54 @@
+#N canvas 475 55 553 680 12;
+#X text 45 134 A trigger is defined as a transition from nonpositive
+(y <= 0) to strictly positive (y > 0). osc~ has one such transition
+per cycle. phasor~ has no values <= 0 \, so it cannot be used directly
+\; however \, the inverse of its differential may be used.;
+#X obj 70 315 osc~ 5;
+#X obj 71 488 *~ 400;
+#X obj 71 513 +~ 300;
+#X obj 71 538 osc~;
+#X obj 161 315 phasor~ 3;
+#X text 231 340 differential: occasional negative spikes;
+#X obj 161 365 *~ -1;
+#N canvas 475 283 450 300 audioswitch 0;
+#X obj 42 38 inlet~;
+#X obj 123 38 inlet~;
+#X obj 210 38 inlet;
+#X obj 123 153 *~;
+#X obj 42 153 *~;
+#X obj 60 100 == 0;
+#X obj 82 213 outlet~;
+#X connect 0 0 4 0;
+#X connect 1 0 3 0;
+#X connect 2 0 3 1;
+#X connect 2 0 5 0;
+#X connect 3 0 6 0;
+#X connect 4 0 6 0;
+#X connect 5 0 4 1;
+#X restore 71 438 pd audioswitch;
+#X obj 71 563 *~ 0.1;
+#X obj 59 605 dac~;
+#X obj 166 407 hradio 15 1 1 2 empty empty empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0;
+#X obj 161 340 rzero~ 1;
+#X text 208 365 flip them to positive spikes;
+#X text 44 33 toggleff-forever~ - a flip-flop toggle responding to
+signal-rate triggers - hjh;
+#X text 45 86 When a trigger arrives at the signal input \, toggleff-forever~
+flips its state from 0 to 1 or 1 to 0, f 61;
+#X obj 71 463 toggleff-forever~, f 24;
+#X text 44 230 This version uses [fexpr~] \, so it has no counter to
+overflow (and no need for a reset inlet). However it may use more CPU
+than toggleff~.;
+#X connect 1 0 8 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 4 0 9 0;
+#X connect 5 0 12 0;
+#X connect 7 0 8 1;
+#X connect 8 0 16 0;
+#X connect 9 0 10 0;
+#X connect 9 0 10 1;
+#X connect 11 0 8 2;
+#X connect 12 0 7 0;
+#X connect 16 0 2 0;
