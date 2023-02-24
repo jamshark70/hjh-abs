@@ -1,0 +1,46 @@
+#N canvas 534 61 486 564 12;
+#N canvas 0 50 450 250 (subpatch) 0;
+#X array a-swap-help 10 float 2;
+#X coords 0 9 10 0 200 140 1 0 0;
+#X restore 39 226 graph;
+#N canvas 191 317 450 300 init 0;
+#X obj 53 37 loadbang;
+#X obj 53 91 t b b, f 9;
+#X msg 113 116 0;
+#X msg 53 116 10;
+#X obj 53 141 until;
+#X obj 53 166 f, f 9;
+#X obj 53 216 tabwrite a-swap-help;
+#X obj 53 191 t f f f, f 39;
+#X obj 349 166 + 1;
+#X obj 129 37 inlet;
+#X connect 0 0 1 0;
+#X connect 1 0 3 0;
+#X connect 1 1 2 0;
+#X connect 2 0 5 1;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 5 0 7 0;
+#X connect 7 0 6 0;
+#X connect 7 1 6 1;
+#X connect 7 2 8 0;
+#X connect 8 0 5 1;
+#X connect 9 0 1 0;
+#X restore 348 168 pd init;
+#X obj 39 168 array-swap a-swap-help;
+#X text 37 122 swap index 3 and index 5;
+#X msg 190 143 symbol other-array;
+#X text 38 33 array-swap: given two indices into an array \, swap their
+values in place - hjh;
+#X text 38 80 A utility abstraction: just what the name says;
+#X obj 348 147 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X text 37 398 Argument: A symbol (array name).;
+#X text 37 510 Outlets: None.;
+#X msg 39 143 3 6;
+#X text 37 430 Inlets: \; 1 One of the indices (or a list of two indices).
+\; 2 The other index (cold inlet). \; 3 A symbol to change to a different
+array.;
+#X connect 4 0 2 2;
+#X connect 7 0 1 0;
+#X connect 10 0 2 0;
