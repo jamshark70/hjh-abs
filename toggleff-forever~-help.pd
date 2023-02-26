@@ -1,15 +1,11 @@
 #N canvas 475 55 553 680 12;
-#X text 45 134 A trigger is defined as a transition from nonpositive
-(y <= 0) to strictly positive (y > 0). osc~ has one such transition
-per cycle. phasor~ has no values <= 0 \, so it cannot be used directly
-\; however \, the inverse of its differential may be used.;
-#X obj 70 315 osc~ 5;
-#X obj 71 488 *~ 400;
-#X obj 71 513 +~ 300;
-#X obj 71 538 osc~;
-#X obj 161 315 phasor~ 3;
-#X text 231 340 differential: occasional negative spikes;
-#X obj 161 365 *~ -1;
+#X obj 70 329 osc~ 5;
+#X obj 71 502 *~ 400;
+#X obj 71 527 +~ 300;
+#X obj 71 552 osc~;
+#X obj 161 329 phasor~ 3;
+#X text 231 354 differential: occasional negative spikes;
+#X obj 161 379 *~ -1;
 #N canvas 475 283 450 300 audioswitch 0;
 #X obj 42 38 inlet~;
 #X obj 123 38 inlet~;
@@ -25,30 +21,39 @@ per cycle. phasor~ has no values <= 0 \, so it cannot be used directly
 #X connect 3 0 6 0;
 #X connect 4 0 6 0;
 #X connect 5 0 4 1;
-#X restore 71 438 pd audioswitch;
-#X obj 71 563 *~ 0.1;
-#X obj 59 605 dac~;
-#X obj 166 407 hradio 15 1 1 2 empty empty empty 0 -8 0 10 #fcfcfc
+#X restore 71 452 pd audioswitch;
+#X obj 71 577 *~ 0.1;
+#X obj 59 619 dac~;
+#X obj 166 421 hradio 15 1 1 2 empty empty empty 0 -8 0 10 #fcfcfc
 #000000 #000000 0;
-#X obj 161 340 rzero~ 1;
-#X text 208 365 flip them to positive spikes;
+#X obj 161 354 rzero~ 1;
+#X text 208 379 flip them to positive spikes;
 #X text 44 33 toggleff-forever~ - a flip-flop toggle responding to
 signal-rate triggers - hjh;
-#X text 45 86 When a trigger arrives at the signal input \, toggleff-forever~
+#X text 45 76 When a trigger arrives at the signal input \, toggleff-forever~
 flips its state from 0 to 1 or 1 to 0, f 61;
-#X obj 71 463 toggleff-forever~, f 24;
-#X text 44 230 This version uses [fexpr~] \, so it has no counter to
-overflow (and no need for a reset inlet). However it may use more CPU
-than toggleff~.;
-#X connect 1 0 8 0;
+#X obj 70 477 toggleff-forever~, f 21;
+#X text 45 119 A trigger is defined as a transition from nonpositive
+(y <= 0) to strictly positive (y > 0). osc~ has one such transition
+per cycle. phasor~ has no values <= 0 \, so it cannot be used directly.
+However \, the inverse of its differential may be used.;
+#X text 45 270 A toggle implies two states. You can specify a different
+cycle length in the right inlet or as an argument.;
+#X text 231 477 or [toggleff-forever~ 2];
+#X floatatom 214 453 5 2 7 2 cycle\ length - - 0;
+#X text 44 210 This version uses [fexpr~] \, to avoid overflowing the
+counter (so it also has no need for a reset inlet). However it may
+use more CPU than toggleff~.;
+#X connect 0 0 7 0;
+#X connect 1 0 2 0;
 #X connect 2 0 3 0;
-#X connect 3 0 4 0;
-#X connect 4 0 9 0;
-#X connect 5 0 12 0;
-#X connect 7 0 8 1;
-#X connect 8 0 16 0;
-#X connect 9 0 10 0;
-#X connect 9 0 10 1;
-#X connect 11 0 8 2;
-#X connect 12 0 7 0;
-#X connect 16 0 2 0;
+#X connect 3 0 8 0;
+#X connect 4 0 11 0;
+#X connect 6 0 7 1;
+#X connect 7 0 15 0;
+#X connect 8 0 9 0;
+#X connect 8 0 9 1;
+#X connect 10 0 7 2;
+#X connect 11 0 6 0;
+#X connect 15 0 1 0;
+#X connect 19 0 15 1;
