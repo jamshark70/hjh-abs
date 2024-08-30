@@ -1,5 +1,5 @@
 #N canvas 340 46 853 622 12;
-#X obj 237 47 r playhead;
+#X obj 237 47 r _playhead;
 #N canvas 400 47 450 562 filterChanges 0;
 #X obj 69 36 inlet;
 #X obj 69 521 outlet;
